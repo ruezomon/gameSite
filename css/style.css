@@ -1,0 +1,78 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin:0px;
+}
+
+header {
+    background-color: #337245;
+    color:#eee;
+    height:60px;
+    width:98%;
+    margin:5px auto;
+    border-radius: 30px;
+    display:flex;
+    font-size: 30px;
+}
+
+.header-content {
+    margin:auto 20px;
+    width:fit-content;
+}
+
+#sitename {
+    padding-right: 10px;
+    border-right: 1px solid #eee;
+}
+
+#collapseButtonHeader, #home-button {
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top:0;
+    background-color: #45965c;
+    color: #eee;
+    padding:8px;
+    width:90px;
+    border:none;
+    text-align:center;
+    outline:none;
+    font-size:20px;
+}
+
+#links-to-pages {
+    position: relative;
+}
+
+#links-to-pages div {
+    padding: 0px 18px;
+    overflow: hidden;
+    background-color: #689575;
+    max-height: 0px;
+    overflow:hidden;
+    transition: max-height 0.1s ease-out;
+    position: absolute;
+    top:100%;
+    width:92px;
+    z-index:100; /*makes it render over other elements*/
+    transform: translateX(39.62%);
+    border-radius: 5px;
+}
+
+#links-to-pages div a {
+    margin:0px;
+    font-size:20px;
+    color:#eee;
+    cursor: pointer;
+    width:90px;
+    height:30px;
+}
+
+header a {
+    text-decoration: none;
+}
+
+#links-to-pages a:hover, #links-to-pages button:hover {
+    background-color:#82b290
+}
