@@ -15,6 +15,8 @@ header {
     border-radius: 30px;
     display:flex;
     font-size: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    justify-content: space-between;
 }
 
 .header-content {
@@ -25,15 +27,16 @@ header {
 #sitename {
     padding-right: 10px;
     border-right: 1px solid #eee;
+    font-weight: bold;
 }
 
-#collapseButtonHeader, #home-button {
+#collapseButtonHeader, .header-button {
     cursor: pointer;
     border-radius: 5px;
     margin-top:0;
     background-color: #45965c;
     color: #eee;
-    padding:8px;
+    padding:8px 0px;
     width:90px;
     border:none;
     text-align:center;
@@ -43,31 +46,33 @@ header {
 
 #links-to-pages {
     position: relative;
+    width:fit-content;
 }
 
-#links-to-pages div {
-    padding: 0px 18px;
+#links-wrapper {
     overflow: hidden;
     background-color: #689575;
     max-height: 0px;
     overflow:hidden;
-    transition: max-height 0.1s ease-out;
+    transition: max-height 0.1s ease-out, padding 0.1s ease-out;
     position: absolute;
     top:100%;
-    width:92px;
-    z-index:100; /*makes it render over other elements*/
-    transform: translateX(39.62%);
+    width:100px;
+    z-index:100;    /* makes it render over other elements */
+    transform: translateX(90%);
     border-radius: 5px;
 }
 
-#links-to-pages div a {
+#links-wrapper a {
     display:inline-block;
     margin:0px;
     font-size:20px;
     color:#eee;
     cursor: pointer;
-    width:90px;
+    width:96px;
     height:30px;
+    border-radius: 5px;
+    padding:7px 0px 0px 6px;
 }
 
 header a {
@@ -81,9 +86,20 @@ header a {
 
 .clickable-link-to-page {
     width:90px;
-    margin-right:20px;
 }
 
-#home-button {
+.header-button {
     width:90px;
+}
+
+@media screen and (max-width: 500px) {
+    header a, header button {
+        float: none;
+        display:block;
+        text-align: left;
+        width:100%;
+    }
+    #links-wrapper {
+        float:none;
+    }
 }
