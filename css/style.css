@@ -61,6 +61,7 @@ header {
 }
 
 #links-to-pages div a {
+    display:inline-block;
     margin:0px;
     font-size:20px;
     color:#eee;
@@ -70,9 +71,19 @@ header {
 }
 
 header a {
+    display:inline-block;
     text-decoration: none;
 }
 
-#links-to-pages a:hover, #links-to-pages button:hover {
+#links-to-pages a:hover, #links-to-pages button:hover, .dropdown-option-header:hover {
     background-color:#82b290
+}
+
+.clickable-link-to-page {
+    width:90px;
+    margin-right:20px;
+}
+
+#home-button {
+    width:90px;
 }
