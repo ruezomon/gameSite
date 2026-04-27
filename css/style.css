@@ -110,15 +110,26 @@ header a {
 }
 
 .game-option-main {
-    width:200px;
-    height:200px;
-    display: inline-block;
+    width:150px;
+    height:150px;
+    display: inline-flex;
+    margin:5px;
+    color:white;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    
+}
+
+.game-option-main div {
+    width:150px;
+    height:150px;
+    background-size: 150px 150px;
+    border-radius: 10px;
+    border:2px grey solid;
+    background-repeat: no-repeat;
 }
 
 #game-option-wordle div {
-    width:200px;
-    height:200px;
-    background-image: url("../images/wordle.jpg");
-    background-repeat: no-repeat;
-    background-size: 200px 200px;
+    background-image: url("../images/wordle.png");
 }
