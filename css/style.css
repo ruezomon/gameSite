@@ -109,16 +109,19 @@ header a {
     margin:auto;
 }
 
+main {
+    font-size: 25px;
+}
+
 .game-option-main {
-    width:150px;
-    height:150px;
     display: inline-flex;
     margin:5px;
     color:white;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    
+    align-content: center;
+    vertical-align: middle;
 }
 
 .game-option-main div {
@@ -128,8 +131,21 @@ header a {
     border-radius: 10px;
     border:2px grey solid;
     background-repeat: no-repeat;
+    line-height: 145px;
 }
 
 #game-option-wordle div {
     background-image: url("../images/wordle.png");
+}
+
+#game-option-snake div {
+    background-image: url("../images/wordle.png");
+}
+
+#game-option-gewinnt div {
+    background-image: url("../images/wordle.png");
+}
+
+.game-option-main:hover {
+    transform: translateY(3px);
 }
