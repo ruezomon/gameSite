@@ -103,3 +103,13 @@ header a {
         float:none;
     }
 }
+
+.game-options {
+    width:fit-content;
+    margin:auto;
+}
+
+.game-option-main {
+    width:50px;
+}
+
