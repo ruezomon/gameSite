@@ -149,3 +149,15 @@ main {
 .game-option-main:hover {
     transform: translateY(3px);
 }
+
+.game-title {
+    width:fit-content;
+    margin:20px auto;
+}
+
+#wordleGameBoard {
+    width:700px;
+    height:800px;
+    background-color: red;
+    margin:auto;
+}
