@@ -17,6 +17,7 @@ header {
     font-size: 30px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     justify-content: space-between;
+    transition: 0.1s ease-out;
 }
 
 .header-content {
@@ -104,6 +105,15 @@ header a {
     }
 }
 
+#toggle-header {
+    height:30px;
+    width:30px;
+    border: 1px solid black;
+    border-radius: 0px;
+    float:right;
+    margin-right:40px;
+}
+
 .game-options {
     width:fit-content;
     margin:auto;
@@ -155,13 +165,27 @@ main {
     margin:20px auto;
 }
 
-#wordleGameBoard {
-    width:700px;
-    height:800px;
-    background-color: red;
+#wordle-game-board {
+    width:fit-content;
+    height:fit-content;
     margin:auto;
 }
 
 .wordle-row {
+    display:flex;
+}
 
+.wordle-text-input-box {
+    width:75px;
+    height:75px;
+    margin:8px 3px;
+    background-color: gainsboro;
+    border: 5px solid grey;
+    border-radius: 15px;
+    text-align: center;
+    vertical-align: middle;
+    line-height:89px;
+    color:black;
+    font-size: 60px;
+    font-weight: bold;
 }
