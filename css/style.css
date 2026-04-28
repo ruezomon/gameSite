@@ -165,6 +165,33 @@ main {
     margin:20px auto 0px auto;
 }
 
+.game-subtitle {
+    width:fit-content;
+    margin:-10px auto 5px auto;
+    font-size: 15px;
+}
+
+#wordle-game-options-menu {
+    width:300px;
+    margin:10px auto;
+    background-color: #dbdbdb;
+    border: 2px solid #656565;
+    border-radius: 6px;
+    padding:5px 0px;
+}
+
+#wordle-game-options-menu p {
+    font-size:20px;
+    width:fit-content;
+    margin:auto;
+}
+
+#wordle-game-options-menu div {
+    width:fit-content;
+    margin:auto;
+    display: flex;
+}
+
 #wordle-game-board {
     width:fit-content;
     height:fit-content;
