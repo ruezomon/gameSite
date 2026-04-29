@@ -3,6 +3,26 @@ const rows = Array.from(document.getElementsByClassName("wordle-row"));
 let enteredWords = 0;
 let currentLetter = 0;
 
+function wiggleScreenError(strErrorMessage) {
+    let id = null;
+    let max = 20;
+    let currentPos = 0;
+    let rounds = 0;
+
+    id = setInterval(() => {
+        if (currentPos != max) {
+            currentPos += 10 * max < 0 ? -1 : 1;
+            gameboard.style.transform = "translate(" + currentPos + "px)";
+        } else {
+            if (max == 0) clearInterval(id);
+            max *= -1;
+            rounds++;
+            if (rounds >= 4) max = 0;
+        }
+    }, 1);
+    console.log("round1");
+}
+
 document.addEventListener("keydown", function(event) {
     if (enteredWords == 6) return;
     switch (event.key.toUpperCase()) {
@@ -33,7 +53,8 @@ document.addEventListener("keydown", function(event) {
         case "Y":
         case "Z":
             if (currentLetter == 5) {
-                // wiggle screen or smth
+                console.log("error!");
+                wiggleScreenError("error");
                 return;
             }
             rows[enteredWords].children[currentLetter].innerHTML = event.key.toUpperCase();
@@ -46,7 +67,8 @@ document.addEventListener("keydown", function(event) {
         case "ENTER":
             event.preventDefault();
             if (currentLetter != 5) {
-                // some kind of error
+                console.log("error!");
+                wiggleScreenError("error");
                 return;
             }
             enteredWords++;
