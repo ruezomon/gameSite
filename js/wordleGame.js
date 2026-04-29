@@ -20,7 +20,7 @@ function wiggleScreenError(strErrorMessage) {
             if (rounds >= 4) max = 0;
         }
     }, 1);
-    console.log("round1");
+    console.log(strErrorMessage);
 }
 
 document.addEventListener("keydown", function(event) {
@@ -53,8 +53,7 @@ document.addEventListener("keydown", function(event) {
         case "Y":
         case "Z":
             if (currentLetter == 5) {
-                console.log("error!");
-                wiggleScreenError("error");
+                wiggleScreenError("Already 5 letters");
                 return;
             }
             rows[enteredWords].children[currentLetter].innerHTML = event.key.toUpperCase();
@@ -67,17 +66,17 @@ document.addEventListener("keydown", function(event) {
         case "ENTER":
             event.preventDefault();
             if (currentLetter != 5) {
-                console.log("error!");
-                wiggleScreenError("error");
+                wiggleScreenError("Must enter 5 letters");
                 return;
             }
             enteredWords++;
             currentLetter = 0;
             
             if (enteredWords == 6) {
-                () => {}
-            }
+                () => {
 
+                }
+            }
             break;
     }
 });

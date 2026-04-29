@@ -205,7 +205,7 @@ main {
 .wordle-text-input-box {
     width:75px;
     height:75px;
-    margin:8px 3px;
+    margin:4px 1px;
     background-color: gainsboro;
     border: 5px solid grey;
     border-radius: 15px;
