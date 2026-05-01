@@ -37,7 +37,6 @@ let gameActive = true;
 // important: ask professor if i should make extra functions to set the colors of the boxes instead of doing it in the main code
 
 let chosenWord = words[parseInt(Math.random() * words.length)].toUpperCase();
-console.debug(chosenWord);
 
 reset.addEventListener("click", function() {
     // resetting without refreshing page bcs efficiency
@@ -55,7 +54,6 @@ reset.addEventListener("click", function() {
     chosenWord = words[parseInt(Math.random() * words.length)].toUpperCase();
     metaMessage.innerHTML = "Enter a 5-letter word";
     comment.innerHTML = commentOptions[0];
-    console.debug(chosenWord);
 });
 
 document.addEventListener("keydown", function(event) {
@@ -118,12 +116,8 @@ document.addEventListener("keydown", function(event) {
             currentLetter = 0;
             comment.innerHTML = commentOptions[enteredWords];
 
-            console.debug(enteredWord);
-
-            // grade entered word
-            console.debug(enteredWord == chosenWord);
-            // win
             if (enteredWord == chosenWord) {
+                // win
                 for (let i = 0; i < 5; i++) {
                     rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
                     rows[enteredWords - 1].children[i].style.color = "white";
@@ -132,9 +126,9 @@ document.addEventListener("keydown", function(event) {
                     comment.innerHTML = "Congratulations! You guessed the word!";
                     metaMessage.innerHTML = "Click reset to play again.";
                     
-                    console.debug(rows[enteredWords - 1].children[i]);
                 }
             } else {
+                // grade
                 for (let i = 0; i < 5; i++) {
                     if (enteredWord[i] == chosenWord[i]) {
                         rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
