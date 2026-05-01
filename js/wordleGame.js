@@ -1,4 +1,8 @@
 const gameboard = document.getElementById("wordle-game-board");
+const reset = document.getElementById("resetGameWordle");
+const comment = document.getElementById("comment-wordle");
+const metaMessage = document.getElementById("meta-message-wordle");
+const commentOptions = ["You got this!", "You got this!", "Third time's the charm!", "Fourth time's the charm?", "Do you really know what you're doing?", "Please don't mess this up.", "Tough luck buddy."];
 const rows = Array.from(document.getElementsByClassName("wordle-row"));
 const words = ['aback', 'abase', 'abate', 'abbey', 'abbot', 'abhor', 'abide', 'abled', 'abode', 'abort', 'about', 'above', 'abuse', 'abyss', 'acorn', 'acrid', 'actor', 'acute', 'adage', 'adapt', 'adept', 'admin', 'admit', 'adobe', 'adopt', 'adore', 'adorn', 'adult', 'affix', 'afire', 'afoot', 'afoul', 'after', 'again', 'agape', 'agate', 'agent', 'agile', 'aging', 'aglow', 'agony', 'agree', 'ahead', 'aider', 'aisle', 'alarm', 'album', 'alert', 'algae', 'alibi', 'alien', 'align', 'alike', 'alive', 'allay', 'alley', 'allot', 'allow', 'alloy', 'aloft', 'alone', 'along', 'aloof', 'aloud', 'alpha', 'altar', 'alter', 'amass', 'amaze', 'amber', 'amble', 'amend', 'amiss', 'amity', 'among', 'ample', 'amply', 'amuse', 'angel', 'anger', 'angle', 'angry', 'angst', 'anime', 'ankle', 'annex', 'annoy', 'annul', 'anode', 'antic', 'anvil', 'aorta', 'apart', 'aphid', 'aping', 'apnea', 'apple', 'apply', 'apron', 'aptly', 'arbor', 'ardor', 'arena', 'argue', 'arise', 'armor', 'aroma', 'arose', 'array', 'arrow', 'arson', 'artsy', 'ascot', 'ashen', 'aside', 'askey', 'assay', 'asset', 'atoll', 'atone', 'attic', 'audio', 'audit', 'augur', 'aunty', 'avail', 'avert', 'avian', 'avoid', 'await', 'awake', 'award', 'aware', 'awash', 'awful', 'awoke', 'axial', 'axiom', 'axion', 'azure', 
         'bacon', 'badge', 'badly', 'bagel', 'baggy', 'baker', 'baler', 'balmy', 'banal', 'banjo', 'barge', 'baron', 'basal', 'basic', 'basil', 'basin', 'basis', 'baste', 'batch', 'bathe', 'baton', 'batty', 'bawdy', 'bayou', 'beach', 'beady', 'beard', 'beast', 'beech', 'beefy', 'befit', 'began', 'begat', 'beget', 'begin', 'begun', 'being', 'belch', 'belie', 'belle', 'belly', 'below', 'bench', 'beret', 'berry', 'berth', 'beset', 'betel', 'bevel', 'bezel', 'bible', 'bicep', 'biddy', 'bigot', 'bilge', 'billy', 'binge', 'bingo', 'biome', 'birch', 'birth', 'bison', 'bitty', 'black', 'blade', 'blame', 'bland', 'blank', 'blare', 'blast', 'blaze', 'bleak', 'bleat', 'bleed', 'bleep', 'blend', 'bless', 'blimp', 'blind', 'blink', 'bliss', 'blitz', 'bloat', 'block', 'bloke', 'blond', 'blood', 'bloom', 'blown', 'bluer', 'bluff', 'blunt', 'blurb', 'blurt', 'blush', 'board', 'boast', 'bobby', 'boney', 'bongo', 'bonus', 'booby', 'boost', 'booth', 'booty', 'booze', 'boozy', 'borax', 'borne', 'bosom', 'bossy', 'botch', 'bough', 'boule', 'bound', 'bowel', 'boxer', 'brace', 'braid', 'brain', 'brake', 'brand', 'brash', 'brass', 'brave', 'bravo', 'brawl', 'brawn', 'bread', 'break', 'breed', 'briar', 'bribe', 'brick', 'bride', 'brief', 'brine', 'bring', 'brink', 'briny', 'brisk', 'broad', 'broil', 'broke', 'brood', 'brook', 'broom', 'broth', 'brown', 'brunt', 'brush', 'brute', 'buddy', 'budge', 'buggy', 'bugle', 'build', 'built', 'bulge', 'bulky', 'bully', 'bunch', 'bunny', 'burly', 'burnt', 'burst', 'bused', 'bushy', 'butch', 'butte', 'buxom', 'buyer', 'bylaw', 
@@ -28,30 +32,34 @@ const words = ['aback', 'abase', 'abate', 'abbey', 'abbot', 'abhor', 'abide', 'a
         'zebra', 'zesty', 'zonal'];
 let enteredWords = 0;
 let currentLetter = 0;
+let gameActive = true;
 
-let chosenWord = words[Math.random() * words.length].toUpperCase();
+// important: ask professor if i should make extra functions to set the colors of the boxes instead of doing it in the main code
 
-function wiggleScreenError(strErrorMessage) {
-    let id = null;
-    let max = 20;
-    let currentPos = 0;
-    let rounds = 0;
+let chosenWord = words[parseInt(Math.random() * words.length)].toUpperCase();
+console.debug(chosenWord);
 
-    id = setInterval(() => {
-        if (currentPos != max) {
-            currentPos += 10 * max < 0 ? -1 : 1;
-            gameboard.style.transform = "translate(" + currentPos + "px)";
-        } else {
-            if (max == 0) clearInterval(id);
-            max *= -1;
-            rounds++;
-            if (rounds >= 4) max = 0;
+reset.addEventListener("click", function() {
+    // resetting without refreshing page bcs efficiency
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 5; j++) {
+            rows[i].children[j].innerHTML = "";
+            rows[i].children[j].style.backgroundColor = "gainsboro";
+            rows[i].children[j].style.color = "black";
+            rows[i].children[j].style.borderColor = "grey";
         }
-    }, 1);
-    console.log(strErrorMessage);
-}
+    }
+    enteredWords = 0;
+    currentLetter = 0;
+    gameActive = true;
+    chosenWord = words[parseInt(Math.random() * words.length)].toUpperCase();
+    metaMessage.innerHTML = "Enter a 5-letter word";
+    comment.innerHTML = commentOptions[0];
+    console.debug(chosenWord);
+});
 
 document.addEventListener("keydown", function(event) {
+    if (!gameActive) return;
     if (enteredWords == 6) return;
     switch (event.key.toUpperCase()) {
         case "A":
@@ -80,6 +88,7 @@ document.addEventListener("keydown", function(event) {
         case "X":
         case "Y":
         case "Z":
+            metaMessage.innerHTML = "Enter a 5-letter word";
             if (currentLetter == 5) {
                 wiggleScreenError("Already 5 letters");
                 return;
@@ -87,24 +96,117 @@ document.addEventListener("keydown", function(event) {
             rows[enteredWords].children[currentLetter].innerHTML = event.key.toUpperCase();
             currentLetter++;
             break;
+
         case "BACKSPACE":
+            metaMessage.innerHTML = "Enter a 5-letter word";
             if (currentLetter == 0) return;
             rows[enteredWords].children[--currentLetter].innerHTML = "";
             break;
+
         case "ENTER":
             event.preventDefault();
             if (currentLetter != 5) {
                 wiggleScreenError("Must enter 5 letters");
                 return;
             }
+            let enteredWord = rows[enteredWords].children[0].innerHTML + rows[enteredWords].children[1].innerHTML + rows[enteredWords].children[2].innerHTML + rows[enteredWords].children[3].innerHTML + rows[enteredWords].children[4].innerHTML;
+            if (!words.includes(enteredWord.toLowerCase())) {
+                wiggleScreenError("Entered word not in dictionary");
+                return;
+            }
             enteredWords++;
             currentLetter = 0;
+            comment.innerHTML = commentOptions[enteredWords];
+
+            console.debug(enteredWord);
+
+            // grade entered word
+            console.debug(enteredWord == chosenWord);
+            // win
+            if (enteredWord == chosenWord) {
+                for (let i = 0; i < 5; i++) {
+                    rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
+                    rows[enteredWords - 1].children[i].style.color = "white";
+                    rows[enteredWords - 1].children[i].style.borderColor = "green";
+                    toggleGameActive();
+                    comment.innerHTML = "Congratulations! You guessed the word!";
+                    metaMessage.innerHTML = "Click reset to play again.";
+                    
+                    console.debug(rows[enteredWords - 1].children[i]);
+                }
+            } else {
+                for (let i = 0; i < 5; i++) {
+                    if (enteredWord[i] == chosenWord[i]) {
+                        rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
+                        rows[enteredWords - 1].children[i].style.color = "white";
+                        rows[enteredWords - 1].children[i].style.borderColor = "green";
+                    } else if (chosenWord.includes(enteredWord[i])) {
+                        rows[enteredWords - 1].children[i].style.backgroundColor = "#e5e500";
+                        rows[enteredWords - 1].children[i].style.color = "white";
+                        rows[enteredWords - 1].children[i].style.borderColor = "yellow";
+                    } else {
+                        rows[enteredWords - 1].children[i].style.backgroundColor = "#888888";
+                        rows[enteredWords - 1].children[i].style.color = "white";
+                        rows[enteredWords - 1].children[i].style.borderColor = "gray";
+                    }
+                }
+                markDuplicateYellowsAsGrey(enteredWord);
+            }
             
             if (enteredWords == 6) {
-                () => {
-
-                }
+                metaMessage.innerHTML = "The word was " + chosenWord + ". Click reset to play again.";
+                toggleGameActive();
             }
             break;
     }
 });
+
+function wiggleScreenError(strErrorMessage) {
+    let id = null;
+    let max = 20;
+    let currentPos = 0;
+    let rounds = 0;
+
+    id = setInterval(() => {
+        if (currentPos != max) {
+            currentPos += 10 * max < 0 ? -1 : 1;
+            gameboard.style.transform = "translate(" + currentPos + "px)";
+        } else {
+            if (max == 0) clearInterval(id);
+            max *= -1;
+            rounds++;
+            if (rounds >= 4) max = 0;
+        }
+    }, 1);
+    metaMessage.innerHTML = strErrorMessage;
+}
+
+function toggleGameActive() {
+    gameActive = !gameActive;
+}
+
+function markDuplicateYellowsAsGrey(enteredWord) {
+    let letterMaxAppearanceMap = new Map();
+    let enteredLetterAppearanceMap = new Map();
+    for (let i = 0; i < 5; i++) {
+        if (!letterMaxAppearanceMap.has(chosenWord[i])) letterMaxAppearanceMap.set(chosenWord[i], 1);
+        else letterMaxAppearanceMap.set(chosenWord[i], letterMaxAppearanceMap.get(chosenWord[i]) + 1);
+        enteredLetterAppearanceMap.set(enteredWord[i], 0);
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (enteredWord[i] == chosenWord[i]) {
+            letterMaxAppearanceMap.set(chosenWord[i], letterMaxAppearanceMap.get(chosenWord[i]) - 1);
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (enteredLetterAppearanceMap.get(enteredWord[i]) >= letterMaxAppearanceMap.get(enteredWord[i]) && enteredWord[i] != chosenWord[i]) {
+            rows[enteredWords - 1].children[i].style.backgroundColor = "#888888";
+            rows[enteredWords - 1].children[i].style.color = "white";
+            rows[enteredWords - 1].children[i].style.borderColor = "gray";
+        } else {
+            enteredLetterAppearanceMap.set(enteredWord[i], enteredLetterAppearanceMap.get(enteredWord[i]) + 1);
+        }
+    }
+}
