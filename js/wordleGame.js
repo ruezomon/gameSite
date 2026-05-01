@@ -2,7 +2,7 @@ const gameboard = document.getElementById("wordle-game-board");
 const reset = document.getElementById("resetGameWordle");
 const comment = document.getElementById("comment-wordle");
 const metaMessage = document.getElementById("meta-message-wordle");
-const commentOptions = ["You got this!", "You got this!", "Third time's the charm!", "Fourth time's the charm?", "Do you really know what you're doing?", "Please don't mess this up.", "Tough luck buddy."];
+const commentOptions = ["You got this!", "You got this!", "Third time's the charm!", "Fourth time's the charm?", "Do you really know what you're doing?", "Please don't mess this up.", "Tough luck, buddy."];
 const rows = Array.from(document.getElementsByClassName("wordle-row"));
 const words = ['aback', 'abase', 'abate', 'abbey', 'abbot', 'abhor', 'abide', 'abled', 'abode', 'abort', 'about', 'above', 'abuse', 'abyss', 'acorn', 'acrid', 'actor', 'acute', 'adage', 'adapt', 'adept', 'admin', 'admit', 'adobe', 'adopt', 'adore', 'adorn', 'adult', 'affix', 'afire', 'afoot', 'afoul', 'after', 'again', 'agape', 'agate', 'agent', 'agile', 'aging', 'aglow', 'agony', 'agree', 'ahead', 'aider', 'aisle', 'alarm', 'album', 'alert', 'algae', 'alibi', 'alien', 'align', 'alike', 'alive', 'allay', 'alley', 'allot', 'allow', 'alloy', 'aloft', 'alone', 'along', 'aloof', 'aloud', 'alpha', 'altar', 'alter', 'amass', 'amaze', 'amber', 'amble', 'amend', 'amiss', 'amity', 'among', 'ample', 'amply', 'amuse', 'angel', 'anger', 'angle', 'angry', 'angst', 'anime', 'ankle', 'annex', 'annoy', 'annul', 'anode', 'antic', 'anvil', 'aorta', 'apart', 'aphid', 'aping', 'apnea', 'apple', 'apply', 'apron', 'aptly', 'arbor', 'ardor', 'arena', 'argue', 'arise', 'armor', 'aroma', 'arose', 'array', 'arrow', 'arson', 'artsy', 'ascot', 'ashen', 'aside', 'askey', 'assay', 'asset', 'atoll', 'atone', 'attic', 'audio', 'audit', 'augur', 'aunty', 'avail', 'avert', 'avian', 'avoid', 'await', 'awake', 'award', 'aware', 'awash', 'awful', 'awoke', 'axial', 'axiom', 'axion', 'azure', 
         'bacon', 'badge', 'badly', 'bagel', 'baggy', 'baker', 'baler', 'balmy', 'banal', 'banjo', 'barge', 'baron', 'basal', 'basic', 'basil', 'basin', 'basis', 'baste', 'batch', 'bathe', 'baton', 'batty', 'bawdy', 'bayou', 'beach', 'beady', 'beard', 'beast', 'beech', 'beefy', 'befit', 'began', 'begat', 'beget', 'begin', 'begun', 'being', 'belch', 'belie', 'belle', 'belly', 'below', 'bench', 'beret', 'berry', 'berth', 'beset', 'betel', 'bevel', 'bezel', 'bible', 'bicep', 'biddy', 'bigot', 'bilge', 'billy', 'binge', 'bingo', 'biome', 'birch', 'birth', 'bison', 'bitty', 'black', 'blade', 'blame', 'bland', 'blank', 'blare', 'blast', 'blaze', 'bleak', 'bleat', 'bleed', 'bleep', 'blend', 'bless', 'blimp', 'blind', 'blink', 'bliss', 'blitz', 'bloat', 'block', 'bloke', 'blond', 'blood', 'bloom', 'blown', 'bluer', 'bluff', 'blunt', 'blurb', 'blurt', 'blush', 'board', 'boast', 'bobby', 'boney', 'bongo', 'bonus', 'booby', 'boost', 'booth', 'booty', 'booze', 'boozy', 'borax', 'borne', 'bosom', 'bossy', 'botch', 'bough', 'boule', 'bound', 'bowel', 'boxer', 'brace', 'braid', 'brain', 'brake', 'brand', 'brash', 'brass', 'brave', 'bravo', 'brawl', 'brawn', 'bread', 'break', 'breed', 'briar', 'bribe', 'brick', 'bride', 'brief', 'brine', 'bring', 'brink', 'briny', 'brisk', 'broad', 'broil', 'broke', 'brood', 'brook', 'broom', 'broth', 'brown', 'brunt', 'brush', 'brute', 'buddy', 'budge', 'buggy', 'bugle', 'build', 'built', 'bulge', 'bulky', 'bully', 'bunch', 'bunny', 'burly', 'burnt', 'burst', 'bused', 'bushy', 'butch', 'butte', 'buxom', 'buyer', 'bylaw', 
@@ -43,9 +43,7 @@ reset.addEventListener("click", function() {
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 5; j++) {
             rows[i].children[j].innerHTML = "";
-            rows[i].children[j].style.backgroundColor = "gainsboro";
-            rows[i].children[j].style.color = "black";
-            rows[i].children[j].style.borderColor = "grey";
+            makeBlockDefault(rows[i].children[j]);
         }
     }
     enteredWords = 0;
@@ -58,7 +56,6 @@ reset.addEventListener("click", function() {
 
 document.addEventListener("keydown", function(event) {
     if (!gameActive) return;
-    if (enteredWords == 6) return;
     switch (event.key.toUpperCase()) {
         case "A":
         case "B":
@@ -119,9 +116,7 @@ document.addEventListener("keydown", function(event) {
             if (enteredWord == chosenWord) {
                 // win
                 for (let i = 0; i < 5; i++) {
-                    rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
-                    rows[enteredWords - 1].children[i].style.color = "white";
-                    rows[enteredWords - 1].children[i].style.borderColor = "green";
+                    makeBlockGreen(rows[enteredWords - 1].children[i]);
                     toggleGameActive();
                     comment.innerHTML = "Congratulations! You guessed the word!";
                     metaMessage.innerHTML = "Click reset to play again.";
@@ -131,17 +126,11 @@ document.addEventListener("keydown", function(event) {
                 // grade
                 for (let i = 0; i < 5; i++) {
                     if (enteredWord[i] == chosenWord[i]) {
-                        rows[enteredWords - 1].children[i].style.backgroundColor = "#04cc4a";
-                        rows[enteredWords - 1].children[i].style.color = "white";
-                        rows[enteredWords - 1].children[i].style.borderColor = "green";
+                        makeBlockGreen(rows[enteredWords - 1].children[i]);
                     } else if (chosenWord.includes(enteredWord[i])) {
-                        rows[enteredWords - 1].children[i].style.backgroundColor = "#e5e500";
-                        rows[enteredWords - 1].children[i].style.color = "white";
-                        rows[enteredWords - 1].children[i].style.borderColor = "yellow";
+                        makeBlockYellow(rows[enteredWords - 1].children[i]);
                     } else {
-                        rows[enteredWords - 1].children[i].style.backgroundColor = "#888888";
-                        rows[enteredWords - 1].children[i].style.color = "white";
-                        rows[enteredWords - 1].children[i].style.borderColor = "gray";
+                        makeBlockGrey(rows[enteredWords - 1].children[i]);
                     }
                 }
                 markDuplicateYellowsAsGrey(enteredWord);
@@ -196,11 +185,33 @@ function markDuplicateYellowsAsGrey(enteredWord) {
 
     for (let i = 0; i < 5; i++) {
         if (enteredLetterAppearanceMap.get(enteredWord[i]) >= letterMaxAppearanceMap.get(enteredWord[i]) && enteredWord[i] != chosenWord[i]) {
-            rows[enteredWords - 1].children[i].style.backgroundColor = "#888888";
-            rows[enteredWords - 1].children[i].style.color = "white";
-            rows[enteredWords - 1].children[i].style.borderColor = "gray";
+            makeBlockGrey(rows[enteredWords - 1].children[i]);
         } else {
             enteredLetterAppearanceMap.set(enteredWord[i], enteredLetterAppearanceMap.get(enteredWord[i]) + 1);
         }
     }
+}
+
+function makeBlockYellow(block) {
+    block.style.backgroundColor = "#e5e500";
+    block.style.color = "white";
+    block.style.borderColor = "yellow";
+}
+
+function makeBlockGreen(block) {
+    block.style.backgroundColor = "#04cc4a";
+    block.style.color = "white";
+    block.style.borderColor = "green";
+}
+
+function makeBlockGrey(block) {
+    block.style.backgroundColor = "#888888";
+    block.style.color = "white";
+    block.style.borderColor = "gray";
+}
+
+function makeBlockDefault(block) {
+    block.style.backgroundColor = "gainsboro";
+    block.style.color = "black";
+    block.style.borderColor = "grey";
 }
