@@ -3,7 +3,7 @@ Sorted by relevance within category
 
 ## Main goals
 
-## Main site
+### Main site
 - Make way to include centrally declared header (ask professor how to do it) (solution found already)
 - Footer
 - favicon
