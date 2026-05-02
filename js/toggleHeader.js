@@ -5,6 +5,7 @@ document.addEventListener("keydown", (event) => {
     if (event.key === " ") {
         event.preventDefault();
         toggleHeader();
+        event.stopPropagation();
     }
 });
 header.addEventListener("mouseover", function() {
