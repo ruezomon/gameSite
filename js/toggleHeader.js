@@ -23,8 +23,10 @@ header.addEventListener("mouseleave", function() {
 function toggleHeader() {
     if (header.style.marginTop === "-50px") {
         header.style.marginTop = "5px";
+        toggleButton.innerHTML = "&uarr;";
     } else {
         header.style.marginTop = "-50px";
+        toggleButton.innerHTML = "&darr;";
     }
     header.classList.toggle("hide");
 }
