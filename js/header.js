@@ -1,5 +1,4 @@
-const headerContainer = document.getElementById("global-header-wrapper");
-headerContainer.innerHTML = `
+document.getElementById("global-header-wrapper").innerHTML = `
 <header id="global-header">
     <div class="header-content" id="sitename">
     !cogugames

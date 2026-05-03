@@ -1,5 +1,5 @@
 const gameboard = document.getElementById("wordle-game-board");
-const reset = document.getElementById("resetGameWordle");
+const reset = document.getElementById("wordle-reset-button");
 const comment = document.getElementById("comment-wordle");
 const metaMessage = document.getElementById("meta-message-wordle");
 const commentOptions = ["You got this!", "You got this!", "Third time's the charm!", "Fourth time's the charm?", "Do you really know what you're doing?", "Please don't mess this up.", "Tough luck, buddy."];
