@@ -5,7 +5,6 @@ Sorted by relevance within category
 
 ### Main site
 - Make way to include centrally declared header (ask professor how to do it) (solution found already)
-- Footer
 - favicon
 - images for all games + assets
 - About us page and/or imprint

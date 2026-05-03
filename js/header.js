@@ -11,6 +11,7 @@ document.getElementById("global-header-wrapper").innerHTML = `
         <a href="snake.html">Snake</a> <br>
         <a href="gewinnt.html">4 Gewinnt</a>
     </div>
+    <a href="rules.html" class="header-button">Regeln</a>
     <a href="aboutUs.html" class="header-button">&Uuml;ber uns</a>
 </div>
 </header>
