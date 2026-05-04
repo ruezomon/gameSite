@@ -178,12 +178,6 @@ let gameActive = true;
 
 let chosenWord = eligibleWords[parseInt(Math.random() * eligibleWords.length)].toUpperCase();
 
-for (let i = 0; i < eligibleWords.length; i++) {
-    if (!everyFiveLetterWord.includes(eligibleWords[i])) {
-        console.log("Error: " + eligibleWords[i] + " is not in the list of every five letter word");
-    }
-}
-
 reset.addEventListener("click", function() {
     // resetting without refreshing page bcs efficiency
     for (let i = 0; i < 6; i++) {
@@ -257,7 +251,7 @@ document.addEventListener("keydown", function(event) {
                 return;
             }
             let enteredWord = rows[enteredWords].children[0].innerHTML + rows[enteredWords].children[1].innerHTML + rows[enteredWords].children[2].innerHTML + rows[enteredWords].children[3].innerHTML + rows[enteredWords].children[4].innerHTML;
-            if (!eligibleWords.includes(enteredWord.toLowerCase())) {
+            if (!everyFiveLetterWord.includes(enteredWord.toLowerCase())) {
                 wiggleScreenError("Entered word not in dictionary");
                 return;
             }

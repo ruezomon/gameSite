@@ -13,6 +13,6 @@ document.getElementById("global-header-wrapper").innerHTML = `
     </div>
     <a href="rules.html" class="header-button">Regeln</a>
     <a href="aboutUs.html" class="header-button">&Uuml;ber uns</a>
+    <button id="toggle-header">&uarr;</button>
 </div>
-</header>
-<button id="toggle-header">&uarr;</button>`
+</header>`
