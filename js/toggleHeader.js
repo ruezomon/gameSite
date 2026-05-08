@@ -11,22 +11,20 @@ document.addEventListener("keydown", (event) => {
 });
 header.addEventListener("mouseover", function() {
     mouseOver = true;
-    console.log(mouseOver);
     if (this.classList.contains("hide")) {
-        this.style.transform = "translateY(55px)";
+        this.style.marginTop = "5px";
     }
 });
 
 header.addEventListener("mouseleave", function() {
     mouseOver = false;
-    console.log(mouseOver);
     if (this.classList.contains("hide")) {
-        this.style.transform = null;
+        this.style.marginTop = "-50px";
     }
 });
 
 function toggleHeader() {
-    if (header.style.marginTop === "-50px") {
+    if (header.classList.contains("hide")) {
         header.style.marginTop = "5px";
         toggleButton.innerHTML = "&uarr;";
     } else {
