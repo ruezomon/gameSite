@@ -263,3 +263,61 @@ footer {
     margin:2px auto;
     font-size: 15px;
 }
+
+#gewinnt-game-board {
+    width:fit-content;
+    height:fit-content;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.gewinnt-row {
+    display:flex;
+}
+
+.gewinnt-tile-wrapper {
+    width:75px;
+    height:75px;
+    margin:1px;
+    border:#000 solid 1px;
+}
+
+.gewinnt-tile {
+    width:70%;
+    height:70%;
+    border: 11.2px solid;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    line-height:89px;
+    color:black;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.gewinnt-input-row {
+    display:flex;
+    justify-content: center;
+    height:75px;
+    width:100%;
+}
+
+.gewinnt-input-row button {
+    width:75px;
+    cursor: pointer;
+    margin:2px;
+    border-radius: 0px;
+    border: 1px solid #eee;
+    background-color: #eee;
+}
+
+.gewinnt-tile[color="1"] {
+    background-color: #ff4d4d;
+    border-color: red;
+}
+
+.gewinnt-tile[color="2"] {
+    background-color: yellow;
+    border-color: yellowgreen;
+}

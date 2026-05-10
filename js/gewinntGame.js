@@ -1,6 +1,24 @@
 const gameBoardArray = [];
+const gameBoardElement = document.getElementById("gewinnt-game-board");
+const resetButton = document.getElementById("gewinnt-reset-button");
 
-function createGameBoard() {
+let player1 = true; // true is player 1, false is player 2;
+let moves = 0;
+let gameActive = true;
+
+resetButton.addEventListener("click", () => {
+    createGameBoardArray();
+    player1 = true;
+    moves = 0;
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 7; j++) {
+            gameBoardElement.getElementsByClassName("gewinnt-row")[i].children[j].innerHTML = "";
+        }
+    }
+    gameActive = true;
+});
+
+function createGameBoardArray() {
     gameBoardArray.length = 0;
     for (let i = 0; i < 6; i++) {
         gameBoardArray.push([]);
@@ -10,13 +28,19 @@ function createGameBoard() {
     }
 }
 
+function visualizeTile(rowInt, collumnInt, colorInt) {
+    gameBoardElement.getElementsByClassName("gewinnt-row")[rowInt].children[collumnInt].innerHTML = `<div class="gewinnt-tile" color="${colorInt}"></div>`;
+}
+
 function dropTile(collumnInt, colorInt) {
-    if (getFreeRow(collumnInt) === -1) return false;
-    gameBoardArray[getFreeRow(collumnInt)][collumnInt] = colorInt;
+    if (getFreeRowForCollumn(collumnInt) === -1) return false;
+    gameBoardArray[getFreeRowForCollumn(collumnInt)][collumnInt] = colorInt;
+    // +1 because wanted row will be occupied in the matrix, but not on the page
+    visualizeTile(getFreeRowForCollumn(collumnInt) + 1, collumnInt, colorInt);
     return true;
 }
 
-function getFreeRow(collumnInt) {
+function getFreeRowForCollumn(collumnInt) {
     if (gameBoardArray[0][collumnInt] !== 0) return -1;
     if (gameBoardArray[5][collumnInt] === 0) return 5;
     for (let i = 0; i < 6; i++)
@@ -24,61 +48,48 @@ function getFreeRow(collumnInt) {
 }
 
 function checkForWin(originRowInt, originCollumnInt, colorInt) {
-    let left = 0, right = 0, up = 0, down = 0;
-    let upright = 0, upleft = 0, downright = 0, downleft = 0;
     let currentRow = originRowInt, currentCollumn = originCollumnInt;
 
-    // check left
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && 0 <= currentCollumn; currentCollumn--) left++;
-    currentCollumn = originCollumnInt;
-    // check right
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && currentCollumn <= 6; currentCollumn++) right++;
-    currentCollumn = originCollumnInt;
-    // check up
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && 0 <= currentRow; currentRow--) up++;
-    currentRow = originRowInt;
-    // check down
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && currentRow <= 5; currentRow++) down++;
-    currentRow = originRowInt;
+    const countDirection = (rowDir, collumnDir) => {
+        let row = originRowInt;
+        let collumn = originCollumnInt; 
+        let count = -1; // -1 is the origin tile, disregarded because if will be counted twice otherwise
+        while (0 <= row && row <= 5 && 0 <= collumn && collumn <= 6 && gameBoardArray[row][collumn] == colorInt) {
+            count++;
+            row += rowDir;
+            collumn += collumnDir;
+        }
+        return count;
+    };
 
-    // check upright
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && (0 <= currentRow && currentCollumn <= 6); upright++) { currentRow--; currentCollumn++; }
-    currentRow = originRowInt;
-    currentCollumn = originCollumnInt;
+    let horizontal = countDirection(0, -1) + countDirection(0, 1) + 1; // +1 is the origin tile
+    let vertical = countDirection(-1, 0) + countDirection(1, 0) + 1;
+    let diagonal1 = countDirection(-1, 1) + countDirection(1, -1) + 1;
+    let diagonal2 = countDirection(-1, -1) + countDirection(1, 1) + 1;
 
-    // check downright
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && (currentRow <= 5 && currentCollumn <= 6); downright++) { currentRow++; currentCollumn++; }
-    currentRow = originRowInt;
-    currentCollumn = originCollumnInt;
-
-    // check upleft 
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && (0 <= currentRow && 0 <= currentCollumn); upleft++) { currentRow--; currentCollumn--; }
-    currentRow = originRowInt;
-    currentCollumn = originCollumnInt;
-
-    // check downleft 
-    for (; gameBoardArray[currentRow][currentCollumn] === colorInt && (currentRow <= 5 && 0 <= currentCollumn); upleft++) { currentRow--; currentCollumn--; }
-    currentRow = originRowInt;
-    currentCollumn = originCollumnInt;
-
-    // to account for the 1 tile already placed, i compare with 3 instead of 4
-    console.log(`Left: ${left}
-right: ${right}
-top: ${up}
-bottom: ${down}
-
-upright: ${upright}
-upleft: ${upleft}
-bottomright: ${downright}
-bottomleft: ${downleft}`);
-    return ((left + right <= 3) || (up + down <= 3) || (upright + downleft <= 3) || (downright + upleft <= 3));
+    return horizontal >= 4 || vertical >= 4 || diagonal1 >= 4 || diagonal2 >= 4;
 }
 
-createGameBoard();
+[].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input, index) => {
+    input.addEventListener("click", () => {
+        if (!gameActive) return;
+        dropTile(index, player1 ? 1 : 2);
+        if (++moves == 42) {
+            gameActive = false;
+            
+            return;
+        }
 
-dropTile(2, 3);
-dropTile(2, 3);
-dropTile(2, 3);
-console.log(gameBoardArray);
-console.log(checkForWin(2, getFreeRow(2) + 1));
-console.log(checkForWin(2, getFreeRow(2) + 1));
+
+
+        if (checkForWin(getFreeRowForCollumn(index) + 1, index, player1 ? 1 : 2)) {
+            gameActive = false;
+            alert(`Spieler ${player1 ? 1 : 2} hat gewonnen!`);
+            return;
+        }
+
+        player1 = !player1;
+    });
+});
+
+createGameBoardArray();
