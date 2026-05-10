@@ -308,8 +308,9 @@ footer {
     cursor: pointer;
     margin:2px;
     border-radius: 0px;
-    border: 1px solid #eee;
-    background-color: #eee;
+    border: 1px solid;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .gewinnt-tile[color="1"] {
