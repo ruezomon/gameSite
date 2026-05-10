@@ -1,6 +1,8 @@
 const gameBoardArray = [];
 const gameBoardElement = document.getElementById("gewinnt-game-board");
 const resetButton = document.getElementById("gewinnt-reset-button");
+const commentElement = document.getElementById("comment-gewinnt");
+const metaElement = document.getElementById("meta-message-gewinnt");
 
 let player1 = true; // true is player 1, false is player 2;
 let moves = 0;
@@ -10,6 +12,8 @@ resetButton.addEventListener("click", () => {
     createGameBoardArray();
     player1 = true;
     moves = 0;
+    commentElement.innerHTML = "Player 1's turn";
+    metaElement.innerHTML = "Hover over a column to select it";
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 7; j++) {
             gameBoardElement.getElementsByClassName("gewinnt-row")[i].children[j].innerHTML = "";
@@ -71,24 +75,46 @@ function checkForWin(originRowInt, originCollumnInt, colorInt) {
 }
 
 [].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input, index) => {
+    input.addEventListener("mouseenter", () => {
+        if (!gameActive) return;
+        input.innerHTML = `<div class="gewinnt-tile" color="${player1 ? 3 : 4}"></div>`;
+    });
+
+    input.addEventListener("mouseleave", () => {
+        if (!gameActive) return;
+        input.innerHTML = "";
+    });
+});
+
+[].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input, index) => {
     input.addEventListener("click", () => {
         if (!gameActive) return;
+        if (getFreeRowForCollumn(index) === -1) return;
         dropTile(index, player1 ? 1 : 2);
-        if (++moves == 42) {
+        
+        moves++;
+        if (moves >= 42) {
             gameActive = false;
-            
+            commentElement.innerHTML = "It's a tie!";
+            metaElement.innerHTML = "Reset to play again";
+            [].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input) => {
+                input.innerHTML = "";
+            });
             return;
         }
-
-
 
         if (checkForWin(getFreeRowForCollumn(index) + 1, index, player1 ? 1 : 2)) {
             gameActive = false;
-            alert(`Spieler ${player1 ? 1 : 2} hat gewonnen!`);
+            commentElement.innerHTML = `Player ${player1 ? 1 : 2} wins!`;
+            metaElement.innerHTML = "Reset to play again";
+            [].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input) => {
+                input.innerHTML = "";
+            });
             return;
         }
-
+        commentElement.innerHTML = `Player ${player1 ? 2 : 1}'s turn`;
         player1 = !player1;
+        input.innerHTML = `<div class="gewinnt-tile" color="${player1 ? 3 : 4}"></div>`;
     });
 });
 

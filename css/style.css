@@ -251,14 +251,14 @@ footer {
     font-weight: bold;
 }
 
-#comment-wordle {
+#comment-wordle, #comment-gewinnt {
     width:fit-content;
     margin:2px auto;
     font-size: 20px;
     font-weight: bold;
 }
 
-#meta-message-wordle {
+#meta-message-wordle, #meta-message-gewinnt {
     width:fit-content;
     margin:2px auto;
     font-size: 15px;
@@ -320,4 +320,14 @@ footer {
 .gewinnt-tile[color="2"] {
     background-color: yellow;
     border-color: yellowgreen;
+}
+
+.gewinnt-tile[color="3"] {
+    background-color: hsla(0, 100%, 65%, 0.3);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.gewinnt-tile[color="4"] {
+    background-color: rgba(255, 255, 0, 0.3);
+    border-color: rgba(153, 205, 50, 0.3);
 }
