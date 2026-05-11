@@ -75,6 +75,13 @@ function checkForWin(originRowInt, originCollumnInt, colorInt) {
     return horizontal >= 4 || vertical >= 4 || diagonal1 >= 4 || diagonal2 >= 4;
 }
 
+function init() {
+    createGameBoardArray();
+    for (let i = 1; i < 5; i++)
+        document.styleSheets[i].disabled = true;
+    document.styleSheets[1].disabled = false;
+}
+
 [].slice.call(document.getElementsByClassName("gewinnt-input-row")[0].children).forEach((input, index) => {
     input.addEventListener("mouseenter", () => {
         if (!gameActive) return;
@@ -119,8 +126,12 @@ function checkForWin(originRowInt, originCollumnInt, colorInt) {
     });
 });
 
-document.getElementById("gewinnt-color-button").addEventListener("onclick", () => {
-    colorScheme = colorScheme < 2 ? colorScheme + 1 : 0;
+document.getElementById("gewinnt-color-button").addEventListener("click", () => {
+    colorScheme = colorScheme < 3 ? colorScheme + 1 : 0;
+    for (let i = 1; i < 5; i++)
+        document.styleSheets[i].disabled = true;
+    document.styleSheets[colorScheme + 1].disabled = false;
+    document.getElementById("gewinnt-color-button").innerHTML = ["R-Y", "B-P", "CB", "Crazy"][colorScheme];
 });
 
-createGameBoardArray();
+init();

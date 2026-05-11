@@ -1,19 +1,19 @@
 .gewinnt-tile[color="1"] {
-    background-color: #ff4d4d;
-    border-color: red;
+    background-color: cyan;
+    border-color:blue; 
 }
 
 .gewinnt-tile[color="2"] {
-    background-color: yellow;
-    border-color: yellowgreen;
+    background-color: lightgreen;
+    border-color: green;
 }
 
 .gewinnt-tile[color="3"] {
-    background-color: hsla(0, 100%, 65%, 0.3);
-    border-color: rgba(255, 0, 0, 0.3);
+    background-color: rgba(0, 255, 255, 0.5);
+    border-color:rgba(0, 0, 255, 0.5); 
 }
 
 .gewinnt-tile[color="4"] {
-    background-color: rgba(255, 255, 0, 0.3);
-    border-color: rgba(153, 205, 50, 0.3);
+    background-color: rgba(144, 238, 144, 0.5);
+    border-color: rgba(0, 128, 0, 0.5);
 }

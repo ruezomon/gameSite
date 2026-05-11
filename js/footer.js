@@ -1,1 +1,1 @@
-document.getElementById("global-footer").innerHTML = `<p>Copyright &copy; 2024 by Guenduez & Colle. All rights reserved.</p>`;
+document.getElementById("global-footer").innerHTML = `<p>Copyright &copy; 2026 by Guenduez & Colle. All rights reserved.</p>`;

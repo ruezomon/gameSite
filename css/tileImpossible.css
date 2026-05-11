@@ -1,0 +1,9 @@
+.gewinnt-tile[color="1"], .gewinnt-tile[color="2"] {
+    background-color: violet;
+    border-color: purple;
+}
+
+.gewinnt-tile[color="3"], .gewinnt-tile[color="4"] {
+    background-color: rgba(238, 130, 238, 0.5);
+    border-color: rgba(128, 0, 128, 0.5);
+}
