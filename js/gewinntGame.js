@@ -131,7 +131,7 @@ document.getElementById("gewinnt-color-button").addEventListener("click", () => 
     for (let i = 1; i < 5; i++)
         document.styleSheets[i].disabled = true;
     document.styleSheets[colorScheme + 1].disabled = false;
-    document.getElementById("gewinnt-color-button").innerHTML = ["R-Y", "B-P", "CB", "Crazy"][colorScheme];
+    document.getElementById("gewinnt-color-button").innerHTML = ["R-Y", "B-G", "CB", "Crazy"][colorScheme];
 });
 
 init();
