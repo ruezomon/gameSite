@@ -210,8 +210,8 @@ footer {
     margin:auto;
 }
 
-.reset-button {
-    margin:auto;
+.options-button {
+    margin:0px 3px;
     padding:4px 0px;
     width:70px;
     text-align:center;
@@ -311,24 +311,4 @@ footer {
     border: 1px solid;
     background-color: transparent;
     border-color: transparent;
-}
-
-.gewinnt-tile[color="1"] {
-    background-color: #ff4d4d;
-    border-color: red;
-}
-
-.gewinnt-tile[color="2"] {
-    background-color: yellow;
-    border-color: yellowgreen;
-}
-
-.gewinnt-tile[color="3"] {
-    background-color: hsla(0, 100%, 65%, 0.3);
-    border-color: rgba(255, 0, 0, 0.3);
-}
-
-.gewinnt-tile[color="4"] {
-    background-color: rgba(255, 255, 0, 0.3);
-    border-color: rgba(153, 205, 50, 0.3);
 }

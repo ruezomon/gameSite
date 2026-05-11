@@ -4,7 +4,6 @@ Sorted by relevance within category
 ## Main goals
 
 ### Main site
-- Make way to include centrally declared header (ask professor how to do it) (solution found already)
 - favicon
 - images for all games + assets
 - About us page and/or imprint
@@ -13,7 +12,7 @@ Sorted by relevance within category
 - Tips for newcomers, for how to play
 
 ### 4 Gewinnt
-- Start, and then focus on small aspects
+- Color scheme cycle button
 
 ### Snake
 - Start, and then focus on small aspects

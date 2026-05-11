@@ -7,6 +7,7 @@ const metaElement = document.getElementById("meta-message-gewinnt");
 let player1 = true; // true is player 1, false is player 2;
 let moves = 0;
 let gameActive = true;
+let colorScheme = 0;
 
 resetButton.addEventListener("click", () => {
     createGameBoardArray();
@@ -116,6 +117,10 @@ function checkForWin(originRowInt, originCollumnInt, colorInt) {
         player1 = !player1;
         input.innerHTML = `<div class="gewinnt-tile" color="${player1 ? 3 : 4}"></div>`;
     });
+});
+
+document.getElementById("gewinnt-color-button").addEventListener("onclick", () => {
+    colorScheme = colorScheme < 2 ? colorScheme + 1 : 0;
 });
 
 createGameBoardArray();
