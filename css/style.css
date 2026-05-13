@@ -344,10 +344,18 @@ footer {
     background-color: darkblue;
 }
 
-.snake-part {
-    width:100%;
-    height:100%;
-    margin:0px;
-    border:1px solid black;
+.snake-block[contents="snake"] {
+    background-color:lightblue;
+}
+
+.snake-block[contents="head"] {
     background-color:green;
+}
+
+.snake-block[contents="apple"] {
+    background-color:red;
+}
+
+.snake-block[contents="empty"] {
+    background-color:darkblue;
 }
