@@ -343,3 +343,11 @@ footer {
     border-radius: 5px;
     background-color: darkblue;
 }
+
+.snake-part {
+    width:100%;
+    height:100%;
+    margin:0px;
+    border:1px solid black;
+    background-color:green;
+}

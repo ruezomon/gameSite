@@ -13,67 +13,193 @@ const DIRECTION = {
     left: 3
 };
 
+const gameBoardArray = [];
+let mustPlaceApple = false;
+
+function getSnakeContents() {
+    return `<div class="snake-part></div>`;
+}
+
 class Snake {
-    headX;
-    headY;
+    direction = DIRECTION.right;
+    // relative to the array
     length;
+    pieces = [];
+    mustIncrease = Boolean();
 
     constructor(x, y, length) {
         this.length = length;
-        this.headX = x;
-        this.headY = y;
         
         gameBoardArray[y + 1][x + 1] = SNAKE.head;
-        for (let i = 0; i < length - 1; i++)
+        this.pieces.push([y + 1, x + 1]);
+        for (let i = 0; i < length - 1; i++) {
             gameBoardArray[y + 1][x - i] = SNAKE.snake;
+            this.pieces.push([y + 1, x - i]);
+        }
     }
-    moveUp() {
 
-    }
     moveDown() {
+        if (this.direction === DIRECTION.up) return;
+        gameBoardArray[this.pieces[0][0] + 1][this.pieces[0][1]] += SNAKE.head;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] = SNAKE.snake;
+        this.pieces.unshift([this.pieces[0][0] + 1, this.pieces[0][1]]);
+        this.direction = DIRECTION.down;
 
+        this.update();
+        if (this.mustIncrease === true) {
+            this.mustIncrease = false; 
+            return;
+        }
+
+        let last = this.pieces.pop();
+        gameBoardArray[last[0]][last[1]] = SNAKE.empty;
     }
+
+    moveUp() {
+        if (this.direction === DIRECTION.down) return;
+        gameBoardArray[this.pieces[0][0] - 1][this.pieces[0][1]] += SNAKE.head;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] = SNAKE.snake;
+        this.pieces.unshift([this.pieces[0][0] - 1, this.pieces[0][1]]);
+        this.direction = DIRECTION.up;
+
+        this.update();
+        if (this.mustIncrease === true) {
+            this.mustIncrease = false;
+            return;
+        }
+
+        let last = this.pieces.pop();
+        gameBoardArray[last[0]][last[1]] = SNAKE.empty;
+    }
+
     moveRight() {
+        if (this.direction === DIRECTION.left) return;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1] + 1] += SNAKE.head;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] = SNAKE.snake;
+        this.pieces.unshift([this.pieces[0][0], this.pieces[0][1] + 1]);
+        this.direction = DIRECTION.right;
+        
+        this.update();
+        if (this.mustIncrease === true) {
+            this.mustIncrease = false; 
+            return;
+        }
 
+        let last = this.pieces.pop();
+        gameBoardArray[last[0]][last[1]] = SNAKE.empty;
     }
-    moveLeft() {
 
+    moveLeft() {
+        if (this.direction === DIRECTION.right) return;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1] - 1] += SNAKE.head;
+        gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] = SNAKE.snake;
+        this.pieces.unshift([this.pieces[0][0], this.pieces[0][1] - 1]);
+        this.direction = DIRECTION.left;
+        
+        this.update();
+        if (this.mustIncrease === true) {
+            this.mustIncrease = false;
+            return 0;
+        }
+
+        let last = this.pieces.pop();
+        gameBoardArray[last[0]][last[1]] = SNAKE.empty;
+    }
+
+    update() {
+        switch (gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] - SNAKE.head) {
+            case SNAKE.wall:
+                break;
+            case SNAKE.snake:
+                break;
+            case SNAKE.apple:
+                this.length++;
+                gameBoardArray[this.pieces[0][0]][this.pieces[0][1]] = SNAKE.head;
+                this.mustIncrease = true;
+                mustPlaceApple = true;
+                break;
+        }
     }
 };
 
-const height = 15;
-const width = 15;
 
-const gameBoardArray = [];
-const gameBoardElement = document.getElementById("snake-game-board");
+class realBoard {
+    height = Number();
+    width = Number();
+    gameActive = Boolean();
 
-function buildGameBoardArray(heightInt, widthInt) {
-    while (true)
-        if (gameBoardArray.pop() === undefined) break;
-    for (let i = 0; i < heightInt + 2; i++) {
-        gameBoardArray.push([]);
-        for (let j = 0; j < widthInt + 2; j++) {
-            gameBoardArray[i].push((j == 0 || j == widthInt + 1 || i == 0 || i == widthInt + 1) ? SNAKE.wall : SNAKE.empty);
+    gameBoardElement = null;
+
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+        this.gameActive = true;
+        this.buildGameBoardArray();
+        this.gameBoardElement = document.getElementById("snake-game-board");
+    }
+
+    buildGameBoardArray() {
+        while (true) 
+            if (gameBoardArray.pop() === undefined) break;;
+        for (let i = 0; i < this.height + 2; i++) {
+            gameBoardArray.push([]);
+            for (let j = 0; j < this.width + 2; j++) {
+                gameBoardArray[i].push((j == 0 || j == this.width + 1 || i == 0 || i == this.width + 1) ? SNAKE.wall : SNAKE.empty);
+            }
         }
+    }
+
+    update() {
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                this.gameBoardElement.children[y].children[x].innerHTML = gameBoardArray[y + 1][x + 1] === 4 ? getSnakeContents() : gameBoardArray[y + 1][x + 1];
+            }
+        } 
+    }
+
+    placeApple() {
+        let y = Number();
+        let x = Number();
+        do {
+            y = Math.round(Math.random() * 1000) % this.height;
+            x = Math.round(Math.random() * 1000) % this.width;
+        } while (gameBoardArray[y + 1][x + 1] !== SNAKE.empty);
+        gameBoardArray[y + 1][x + 1] = SNAKE.apple; 
+    }
+
+    startGame() {
+        this.gameActive = true;
+    }
+
+    stopGame() {
+        this.gameActive = false;
+    }
+
+    reset() {
+        this.buildGameBoardArray();
     }
 }
 
-function update() {
-    gameBoardArray.forEach((element, y) => {
-        if (y === 0 || y === height + 1) return;
-        element.forEach((element, x) => {
-            if (element === 8) return;
-            gameBoardElement[y + 1][x + 1] = element === SNAKE.head ? "head" : 
-                                                element === SNAKE.snake ? "tail" : 
-                                                element === SNAKE.apple ? "apple" : "none";
-        });
-    });
-}
-
-buildGameBoardArray(height, width);
+let game = new realBoard(15, 15);
+let player = new Snake(5, 3, 3);
 player = new Snake(5, 3, 3);
-gameBoardArray.forEach(element => {
-    console.log(element);
-});
 
-update();
+game.placeApple();
+game.update();
+
+document.addEventListener("keypress", (event) => {
+    if (event.key === "w") {
+        player.moveUp();
+    } else if (event.key === "a") {
+        player.moveLeft();
+    } else if (event.key === "d") {
+        player.moveRight();
+    } else if (event.key == "s") {
+        player.moveDown();
+    }
+    if (mustPlaceApple === true) {
+        game.placeApple();
+        mustPlaceApple = false;
+    }
+    game.update();
+});
