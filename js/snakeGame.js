@@ -110,8 +110,7 @@ class Snake {
                 break;
         }
     }
-};
-
+}
 
 class gameBoard {
     height = Number();
@@ -205,11 +204,11 @@ document.addEventListener("keypress", (event) => {
 });
 
 function lose() {
-    alert("ya dumbfuck");
+    gameActive = false;
 }
 
 function win() {
-
+    gameActive = false;
 }
 
 game.placeApple();
