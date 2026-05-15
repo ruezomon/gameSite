@@ -251,14 +251,14 @@ footer {
     font-weight: bold;
 }
 
-#comment-wordle, #comment-gewinnt {
+#comment-wordle, #comment-gewinnt, #comment-snake {
     width:fit-content;
     margin:2px auto;
     font-size: 20px;
     font-weight: bold;
 }
 
-#meta-message-wordle, #meta-message-gewinnt {
+#meta-message-wordle, #meta-message-gewinnt, #meta-message-snake {
     width:fit-content;
     margin:2px auto;
     font-size: 15px;
@@ -358,4 +358,9 @@ footer {
 
 .snake-block[contents="empty"] {
     background-color:darkblue;
+}
+
+#snake-score-apples {
+    margin:auto;
+    width:fit-content;
 }
