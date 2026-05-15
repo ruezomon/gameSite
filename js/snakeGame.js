@@ -17,11 +17,12 @@ const gameBoardArray = [];
 let mustPlaceApple = false;
 let mustReset = false;
 
-let ms = 300;
+let ms = 120;
 
 class Snake {
     deletedPiece = [0, 0];
     direction = DIRECTION.right;
+    queuedDirection = DIRECTION.right;
     // relative to the array
     length;
     pieces = [];
@@ -38,9 +39,13 @@ class Snake {
         }
     }
 
-    setDirection(direction) {
-        if (direction != this.direction - 2 && direction != this.direction + 2)
-            this.direction = direction;
+    queueDirection(direction) {
+        this.queuedDirection = direction;
+    }
+
+    setDirection() {
+        if (this.queuedDirection != this.direction - 2 && this.queuedDirection != this.direction + 2)
+            this.direction = this.queuedDirection;
     }
 
     headIsFine() {
@@ -210,6 +215,7 @@ class gameBoard {
             document.getElementById("comment-snake").innerHTML = "Collect all the apples!"
             document.getElementById("meta-message-snake").innerHTML = "Survive"
             this.gameLoopID = setInterval(() => {
+                player.setDirection();
                 player.move();
                 game.update();
             }, ms);
@@ -230,6 +236,8 @@ class gameBoard {
         this.scoreElement.innerHTML = "Score: 3";
         game.placeApple();
         game.update();
+        document.getElementById("comment-snake").innerHTML = "Collect all the apples!"
+        document.getElementById("meta-message-snake").innerHTML = "Press right-arrow key to start"
     }
 }
 
@@ -247,19 +255,19 @@ document.addEventListener("keydown", (event) => {
     switch (event.keyCode) {
         case 37:
             event.preventDefault();
-            player.setDirection(DIRECTION.left);
+            player.queueDirection(DIRECTION.left);
             break;
         case 38:
             event.preventDefault();
-            player.setDirection(DIRECTION.up);
+            player.queueDirection(DIRECTION.up);
             break;
         case 39:
             event.preventDefault();
-            player.setDirection(DIRECTION.right);
+            player.queueDirection(DIRECTION.right);
             break;
         case 40:
             event.preventDefault();
-            player.setDirection(DIRECTION.down);
+            player.queueDirection(DIRECTION.down);
             break;
     }
 
@@ -273,12 +281,18 @@ function lose() {
     mustReset = true;
     game.stopGame();
     document.getElementById("comment-snake").innerHTML = "You lost!";
+    document.getElementById("meta-message-snake").innerHTML = "Click reset to try again."
 }
 
 function win() {
     game.stopGame();
     document.getElementById("comment-snake").innerHTML = "You won!";
+    document.getElementById("meta-message-snake").innerHTML = "Congratulations, you have no life."
 }
 
 game.placeApple();
 game.update();
+
+// quick AI update: i had an issue, where the snake became rapidly faster over time
+// i asked an AI and found the problem: i was stacking gameloops!!
+// the AI helped me in fixing that

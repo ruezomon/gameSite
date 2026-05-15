@@ -345,11 +345,11 @@ footer {
 }
 
 .snake-block[contents="snake"] {
-    background-color:lightblue;
+    background-color:rgb(3, 180, 3);
 }
 
 .snake-block[contents="head"] {
-    background-color:green;
+    background-color:rgb(3, 121, 3)
 }
 
 .snake-block[contents="apple"] {
