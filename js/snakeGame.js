@@ -196,7 +196,7 @@ class gameBoard {
             }
         }
         if (player.length === 225) win();
-        this.scoreElement.innerHTML = `Score: ${player.length}`;
+        this.scoreElement.innerHTML = `Length: ${player.length}`;
     }
 
     placeApple() {
@@ -229,11 +229,13 @@ class gameBoard {
     }
 
     reset() {
+        clearInterval(game.gameLoopID);
         mustReset = false;
+        mustPlaceApple = false;
         this.buildGameBoardArray();
         player = new Snake(5, 3, 3);
         gameActive = false;
-        this.scoreElement.innerHTML = "Score: 3";
+        this.scoreElement.innerHTML = "Length: 3";
         game.placeApple();
         game.update();
         document.getElementById("comment-snake").innerHTML = "Collect all the apples!"
@@ -258,6 +260,8 @@ document.getElementById("snake-difficulty").addEventListener("click", (event) =>
         ms = 240;
         document.getElementById("snake-difficulty").innerHTML = "Easy";
     }
+
+    game.reset();
 });
 
 document.addEventListener("keydown", (event) => {
