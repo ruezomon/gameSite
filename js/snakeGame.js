@@ -17,7 +17,7 @@ const gameBoardArray = [];
 let mustPlaceApple = false;
 let mustReset = false;
 
-let ms = 120;
+let ms = 300;
 
 class Snake {
     deletedPiece = [0, 0];
@@ -246,6 +246,19 @@ let game = new gameBoard(15, 15);
 let player = new Snake(5, 3, 3);
 
 document.getElementById("snake-reset-button").addEventListener("click", game.reset.bind(game)); // .bind() by AI
+
+document.getElementById("snake-difficulty").addEventListener("click", (event) => {
+    if (document.getElementById("snake-difficulty").innerHTML == "Easy") {
+        ms = 120;
+        document.getElementById("snake-difficulty").innerHTML = "Normal";
+    } else if (document.getElementById("snake-difficulty").innerHTML == "Normal") {
+        ms = 60;
+        document.getElementById("snake-difficulty").innerHTML = "Hard";
+    } else {
+        ms = 240;
+        document.getElementById("snake-difficulty").innerHTML = "Easy";
+    }
+});
 
 document.addEventListener("keydown", (event) => {
     game.startGame(event.keyCode);
