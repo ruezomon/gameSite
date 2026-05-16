@@ -9,15 +9,16 @@ Sorted by relevance within category
 - About us page and/or imprint
 
 ### Wordle
-- Tips for newcomers, for how to play
+- done
 
 ### 4 Gewinnt
-- Color scheme cycle button
+- done
 
 ### Snake
-- Start, and then focus on small aspects
+- done
+
+### Minesweeper (new)
+- classic minesweeper
 
 ## additional feedback
 - We need audio-feedback (like clicking noise for buttons)
-- Better design, because the whole thing looks just blank right now
-- More easing in animations
