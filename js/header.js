@@ -9,7 +9,7 @@ document.getElementById("global-header-wrapper").innerHTML = `
     <div id="links-wrapper">
         <a href="wordle.html">Wordle</a> <br>
         <a href="snake.html">Snake</a> <br>
-        <a href="gewinnt.html">4 Gewinnt</a>
+        <a href="gewinnt.html">Connect 4</a>
     </div>
     <a href="rules.html" class="header-button">Rules</a>
     <a href="aboutUs.html" class="header-button">About us</a>
