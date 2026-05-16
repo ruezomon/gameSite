@@ -364,3 +364,32 @@ footer {
     margin:auto;
     width:fit-content;
 }
+
+#rules-main {
+    margin-top:20px;
+}
+
+#rules-main h1 {
+    font-size: 65px;
+    margin:auto;
+    width:fit-content;
+}
+
+.rules-paragraph {
+    margin:20px 0px;
+    width:100%;
+}
+
+#rules-main h2 {
+    margin:auto;
+    width:fit-content;
+    text-decoration: solid underline;
+}
+
+#rules-main p {
+    width:fit-content;
+    margin:auto;
+    max-width: 800px;
+    text-align: center;
+    font-size:22px;
+}

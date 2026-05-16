@@ -8,8 +8,56 @@
 </head>
 <body>
     <div id="global-header-wrapper"></div>
-    <main>
+    <main id="rules-main">
         <h1>Rules</h1>
+        <div class="rules-paragraph">
+            <h2>Wordle</h2>
+            <p>
+                In this game there is a secret 5-letter word, which you must guess within 6 attempts. 
+                After each guess, your word will be graded. A green letter means its the correct letter at the correct position. 
+                A yellow letter means its the correct letter, at the wrong position. A gray letter means this letter is not even 
+                in the word to begin with.   
+            </p>
+            <p>
+                Every word you enter must be a valid word. Random jibbledigook wont work.
+            </p>
+            <p>
+                Letters can appear more than once, e.g. "VIVID" 
+            </p>
+            <p>
+                If you guess a duplicate letter and only one copy is in the word, only one tile turns green/yellow, the other goes gray.<br>
+            </p>
+            <p>
+                In this iteration of Wordle, you must enter the words using your keyboard, and letters previously marked as gray, will be 
+                marked red once entered, as a quick reminder, in case you already forgot. 
+            </p>
+        </div>
+
+        <div class="rules-paragraph">
+            <h2>Snake</h2>
+            <p>
+                You control a snake on a grid. Your goal is to eat all the apples (the red blobs) without dying. <br>
+                The snake moves continuously in the current direction, without stopping. 
+                Eating an apple makes the snake longer. <br>
+                You will die, if the snake crashes into the wall, or into itself. 
+            </p>
+            <p>
+                You must use the arrow keys to change direction, but you may not reverse directly. This means that 
+                when moving right, you may not instantly move left. 
+            </p>
+            <p>
+                Your score is your current length. You start at 3. 
+            </p>
+            <p>
+                You "win" by reaching the length 225, aka. filling the board completely. <br>
+                You lose once you die. 
+            </p>
+            <p>
+                To start, press the right arrow key. <br>
+                To reset, press the reset button in the control menu, or press R on your keyboard. <br>
+                To adjust the speed, choose a different difficulty setting in the control menu. 
+            </p>
+        </div>
     </main>
 
     <footer id="global-footer"></footer>
