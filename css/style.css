@@ -97,12 +97,15 @@ header a {
 }
 
 #toggle-header {
-    height:30px;
-    width:30px;
-    border: 1px solid black;
+    height:35px;
+    width:35px;
+    border: transparent;
     border-radius: 0px;
     float:right;
     margin:4px 2px 0px 15px;
+    border-radius: 50%;
+    background-color: #45965c;
+    color:white;
 }
 
 .game-options {
@@ -392,4 +395,26 @@ footer {
     max-width: 800px;
     text-align: center;
     font-size:22px;
+}
+
+.back-to-home-link {
+    display:block;
+    width:fit-content;
+    padding:5px;
+    height:fit-content;
+    background-color: rgb(6, 169, 6);
+    border: 2px solid rgb(2, 90, 2);
+    color:white;
+    text-decoration: none;
+    border-radius:7px;
+    font-size: 20px;
+    margin-left:30px;
+}
+
+#bottom-back-to-home-link {
+    margin:auto;
+}
+
+.back-to-home-link:hover {
+    transform: translateY(1px);
 }
