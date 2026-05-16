@@ -10,6 +10,7 @@ document.getElementById("global-header-wrapper").innerHTML = `
         <a href="wordle.html">Wordle</a> <br>
         <a href="snake.html">Snake</a> <br>
         <a href="gewinnt.html">Connect 4</a>
+        <a href="minesweeper.html">Minesweeper</a>
     </div>
     <a href="rules.html" class="header-button">Rules</a>
     <a href="aboutUs.html" class="header-button">About us</a>

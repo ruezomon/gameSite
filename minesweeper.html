@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamesite Guenduez & Colle</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="global-header-wrapper"></div>
+    <main>
+        <h1 class="game-title">Minesweeper</h1>
+        <p class="game-subtitle">Use your mouse-pointer</p>
+        <div class="game-options-menu">
+            <p>-- Options --</p>
+            <div>
+                <button type="button" id="minesweeper-reset" class="options-button">Reset</button>
+                <button type="button" id="toggle-difficulty" class="options-button">Easy</button>
+            </div>
+        </div>
+
+        <p id="comment-minesweeper">Don't blow yourself up!</p>
+        <p id="meta-message-minesweeper">Click anywhere to start</p>
+
+        <div class="minesweeper-gameboard"></div>
+
+    </main>
+
+    <footer id="global-footer"></footer>
+
+    <script src="./js/header.js"></script>
+    <script src="./js/footer.js"></script>
+    <script src="./js/collapseHeaderGameOptions.js"></script>
+    <script src="./js/toggleHeader.js"></script>
+    <script src="./js/minesweeperGame.js"></script>
+</body>
+</html>

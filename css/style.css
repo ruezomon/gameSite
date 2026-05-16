@@ -61,7 +61,7 @@ header {
     transition: max-height 0.1s ease-out, padding 0.1s ease-out;
     position: absolute;
     top:100%;
-    width:100px;
+    width:130px;
     z-index:100;    /* makes it render over other elements */
     transform: translateX(90%);
     border-radius: 5px;
@@ -73,10 +73,10 @@ header {
     font-size:20px;
     color:#eee;
     cursor: pointer;
-    width:96px;
+    width:125px;
     height:30px;
     border-radius: 5px;
-    padding:7px 0px 0px 6px;
+    padding:7px 0px 0px 4px;
 }
 
 header a {
@@ -147,19 +147,19 @@ footer {
 }
 
 .game-option-main div {
-    width:150px;
-    height:150px;
-    background-size: 150px 150px;
+    width:175px;
+    height:175px;
+    background-size: 175px 175px;
     border-radius: 10px;
     border:2px grey solid;
     background-repeat: no-repeat;
-    line-height: 145px;
+    line-height: 170px;
 }
 
 .other-options-main {
     display: block;
-    height:50px;
-    width:498px;
+    height:70px;
+    width:766px;
     margin:10px auto;
     color:white;
     text-align: center;
@@ -180,6 +180,10 @@ footer {
 }
 
 #game-option-gewinnt div {
+    background-image: url("../images/wordle.png");
+}
+
+#game-option-minesweeper div {
     background-image: url("../images/wordle.png");
 }
 
@@ -254,14 +258,14 @@ footer {
     font-weight: bold;
 }
 
-#comment-wordle, #comment-gewinnt, #comment-snake {
+#comment-wordle, #comment-gewinnt, #comment-snake, #comment-minesweeper {
     width:fit-content;
     margin:2px auto;
     font-size: 20px;
     font-weight: bold;
 }
 
-#meta-message-wordle, #meta-message-gewinnt, #meta-message-snake {
+#meta-message-wordle, #meta-message-gewinnt, #meta-message-snake, #meta-message-minesweeper {
     width:fit-content;
     margin:2px auto;
     font-size: 15px;
@@ -417,4 +421,33 @@ footer {
 
 .back-to-home-link:hover {
     transform: translateY(1px);
+}
+
+.minesweeper-gameboard {
+    width:fit-content;
+    margin:auto;
+    border:10px solid rgb(75, 75, 75);
+}
+
+.minesweeper-row {
+    display:flex;
+    margin:0px;
+}
+
+.minesweeper-tile {
+    margin:0px;
+    height:30px;
+    width:30px;
+}
+
+.minesweeper-clickable {
+    width:30px;
+    height:30px;
+    border-radius: 0px;
+    margin:0px;
+    background-color: rgb(132, 132, 132);
+}
+
+.bomb {
+    background-color: red;
 }
