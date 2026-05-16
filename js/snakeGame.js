@@ -294,6 +294,10 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+document.addEventListener("keydown", (event) => {
+    if (event.key === "r") game.reset().bind(game);
+});
+
 function lose() {
     mustReset = true;
     game.stopGame();
@@ -307,8 +311,12 @@ function win() {
     document.getElementById("meta-message-snake").innerHTML = "Congratulations, you have no life."
 }
 
-game.placeApple();
-game.update();
+function init() {
+    game.placeApple();
+    game.update();
+}
+
+init();
 
 // quick AI update: i had an issue, where the snake became rapidly faster over time
 // i asked an AI and found the problem: i was stacking gameloops!!

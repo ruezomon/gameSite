@@ -1,5 +1,5 @@
 const gameboard = document.getElementById("wordle-game-board");
-const reset = document.getElementById("wordle-reset-button");
+const resetButton = document.getElementById("wordle-reset-button");
 const comment = document.getElementById("comment-wordle");
 const metaMessage = document.getElementById("meta-message-wordle");
 const commentOptions = ["You got this!", "You got this!", "Third time's the charm!", "Fourth time's the charm?", "Do you really know what you're doing?", "Please don't mess this up.", "Tough luck, buddy."];
@@ -175,8 +175,7 @@ let gameActive = true;
 
 let chosenWord = eligibleWords[parseInt(Math.random() * eligibleWords.length)].toUpperCase();
 
-reset.addEventListener("click", function() {
-    // resetting without refreshing page bcs efficiency
+function reset() {
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 5; j++) {
             rows[i].children[j].innerHTML = "";
@@ -190,7 +189,9 @@ reset.addEventListener("click", function() {
     chosenWord = eligibleWords[parseInt(Math.random() * eligibleWords.length)].toUpperCase();
     metaMessage.innerHTML = "Enter a 5-letter word";
     comment.innerHTML = commentOptions[0];
-});
+}
+
+resetButton.addEventListener("click", reset);
 
 document.addEventListener("keydown", function(event) {
     if (!gameActive) return;

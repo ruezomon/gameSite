@@ -9,7 +9,7 @@ let moves = 0;
 let gameActive = true;
 let colorScheme = 0;
 
-resetButton.addEventListener("click", () => {
+function reset() {
     createGameBoardArray();
     player1 = true;
     moves = 0;
@@ -21,6 +21,11 @@ resetButton.addEventListener("click", () => {
         }
     }
     gameActive = true;
+}
+
+resetButton.addEventListener("click", reset);
+document.addEventListener("keydown", (event) => {
+    if (event.key === "r") reset();
 });
 
 function createGameBoardArray() {
