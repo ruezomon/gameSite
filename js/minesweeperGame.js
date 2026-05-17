@@ -1,6 +1,7 @@
 const difficultyToggleButton = document.getElementById("toggle-difficulty");
 let difficulty = 0;
 const gameBoardElement = document.getElementsByClassName("minesweeper-gameboard")[0];
+const commentElement = document.getElementById("minesweeper-comment");
 
 const tileTemplate = `<div class="minesweeper-tile"><button class="minesweeper-clickable"></button></div>`;
 const rowTemplate = `<div class="minesweeper-row"></div>`;
