@@ -449,5 +449,13 @@ footer {
 }
 
 .bomb {
-    background-color: red;
+
+}
+
+.bomb-parent {
+    background-color:red;
+}
+
+.marked-as-bomb {
+    background-color: blue;
 }
