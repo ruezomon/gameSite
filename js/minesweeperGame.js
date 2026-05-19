@@ -108,11 +108,42 @@ function initNumbersForTiles() {
     }
 }
 
+function rawDiscover(row, collumn) {
+    gameBoardElement.children[row].children[collumn].children[0].remove();
+    discoveredTiles++;
+}
+
 function discover(row, collumn) {
     if (gameBoardElement.children[row].children[collumn].children[0].classList.contains("marked-as-bomb")) return;
-    gameBoardElement.children[row].children[collumn].children[0].remove();
     if (gameBoardElement.children[row].children[collumn].classList.contains("bomb-parent")) lose();
-    discoveredTiles++;
+    discoverWhenFree(row, collumn);
+}
+
+function discoverWhenFree(row, collumn) {
+    if (!gameBoardElement.children[row].children[collumn].classList.contains("surrounded-0")) {
+        rawDiscover(row, collumn);
+        return;
+    }
+    if (gameBoardElement.children[row].children[collumn].children[0] !== undefined)
+        rawDiscover(row, collumn);
+
+    if (row !== boardHeight - 1 && gameBoardElement.children[row + 1].children[collumn].children[0] !== undefined)
+        discoverWhenFree(row + 1, collumn);
+    if (row !== 0 && gameBoardElement.children[row - 1].children[collumn].children[0] !== undefined)
+        discoverWhenFree(row - 1, collumn);
+    if (collumn !== boardWidth - 1 && gameBoardElement.children[row].children[collumn + 1].children[0] !== undefined)
+        discoverWhenFree(row, collumn + 1);
+    if (collumn !== 0 && gameBoardElement.children[row].children[collumn - 1].children[0] !== undefined)
+        discoverWhenFree(row, collumn - 1);
+
+    if (row !== boardHeight - 1 && collumn !== boardWidth - 1 && gameBoardElement.children[row + 1].children[collumn + 1].children[0] !== undefined)
+        discoverWhenFree(row + 1, collumn + 1);
+    if (row !== 0 && collumn !== 0 && gameBoardElement.children[row - 1].children[collumn - 1].children[0] !== undefined)
+        discoverWhenFree(row - 1, collumn - 1);
+    if (row !== boardHeight - 1 && collumn !== 0 && gameBoardElement.children[row + 1].children[collumn - 1].children[0] !== undefined)
+        discoverWhenFree(row + 1, collumn -1);
+    if (row !== 0 && collumn !== boardWidth - 1 && gameBoardElement.children[row - 1].children[collumn + 1].children[0] !== undefined)
+        discoverWhenFree(row - 1, collumn + 1);
 }
 
 function mark(row, collumn) {
