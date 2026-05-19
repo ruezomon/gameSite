@@ -11,6 +11,7 @@ let boardHeight = 9;
 let bombSum = 10;
 let bombsMarkedSum = 0; 
 let wrongBombsMarked = 0;
+let discoveredTiles = 0;
 let gameActive = true;
 let started = false;
 
@@ -38,15 +39,9 @@ difficultyToggleButton.addEventListener("click", () => {
 });
 
 document.getElementById("minesweeper-reset").addEventListener("click", reset);
-
-function reset() {
-    bombsLeft = bombSum;
-    bombsMarkedSum = 0;
-    clearGameBoard();
-    buildGameBoard(boardHeight, boardWidth);
-    makeDiscoverable();
-    gameActive = true;
-}
+document.addEventListener("keydown", (event) => {
+    if (event.key === "r") reset();
+});
 
 function clearGameBoard() {
     while (gameBoardElement.children[0] !== undefined) gameBoardElement.children[0].remove();
@@ -80,32 +75,87 @@ function makeDiscoverable() {
         for (let j = 0; j < boardWidth; j++) {
 
             gameBoardElement.children[i].children[j].children[0].addEventListener("click", (event) => {
+                if (!started) {
+                    start(i, j);
+                }
                 if (!gameActive) return;
-                if (gameBoardElement.children[i].children[j].children[0].classList.contains("marked-as-bomb")) return;
-                gameBoardElement.children[i].children[j].children[0].remove();
+                discover(i, j);
             });
 
             gameBoardElement.children[i].children[j].children[0].addEventListener("contextmenu", (event) => {
                 if (!gameActive) return;
                 event.preventDefault();
-                if (gameBoardElement.children[i].children[j].children[0].classList.contains("marked-as-bomb")) {
-                    bombsMarkedSum--;
-                    if (!gameBoardElement.children[i].children[j].classList.contains("bomb-parent")) wrongBombsMarked--;
-                } else {
-                    bombsMarkedSum++;
-                    if (!gameBoardElement.children[i].children[j].classList.contains("bomb-parent")) wrongBombsMarked++;
-                }
-                gameBoardElement.children[i].children[j].children[0].classList.toggle("marked-as-bomb");
+                mark(i, j);
+                if (bombSum === bombsMarkedSum && wrongBombsMarked === 0) win();
             });
 
         }
     }
 }
 
-function start() {
-    placeBombs();
+function initNumbersForTiles() {
+    for (let i = 0; i < boardHeight; i++) {
+        for (let j = 0; j < boardWidth; j++) {
+            let sum = 0;
+            [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]].forEach(e => {
+                if (gameBoardElement.children[i + e[0]] !== undefined && gameBoardElement.children[i + e[0]].children[j + e[1]] !== undefined)
+                    if (gameBoardElement.children[i + e[0]].children[j + e[1]].classList.contains("bomb-parent")) 
+                        sum++;
+            });
+            if (!gameBoardElement.children[i].children[j].classList.contains("bomb-parent"))
+                gameBoardElement.children[i].children[j].classList.add(`surrounded-${sum}`);
+        }
+    }
 }
 
-buildGameBoard(9, 9);
-placeBombs();
-makeDiscoverable();
+function discover(row, collumn) {
+    if (gameBoardElement.children[row].children[collumn].children[0].classList.contains("marked-as-bomb")) return;
+    gameBoardElement.children[row].children[collumn].children[0].remove();
+    if (gameBoardElement.children[row].children[collumn].classList.contains("bomb-parent")) lose();
+    discoveredTiles++;
+}
+
+function mark(row, collumn) {
+    if (gameBoardElement.children[row].children[collumn].children[0].classList.contains("marked-as-bomb")) {
+        bombsMarkedSum--;
+        if (!gameBoardElement.children[row].children[collumn].classList.contains("bomb-parent")) wrongBombsMarked--;
+    } else {
+        bombsMarkedSum++;
+        if (!gameBoardElement.children[row].children[collumn].classList.contains("bomb-parent")) wrongBombsMarked++;
+    }
+    gameBoardElement.children[row].children[collumn].children[0].classList.toggle("marked-as-bomb");
+}
+
+function start(row, collumn) {
+    placeBombs(row, collumn);
+    initNumbersForTiles();
+    started = true;
+    gameActive = true;
+}
+
+function lose() {
+    gameActive = false;
+    alert("you lost");
+}
+
+function win() {
+    gameActive = false;
+    alert("you won");
+}
+
+function reset() {
+    bombsMarkedSum = 0;
+    clearGameBoard();
+    buildGameBoard(boardHeight, boardWidth);
+    makeDiscoverable();
+    placeBombs();
+    initNumbersForTiles();
+    gameActive = true;
+}
+
+function init() {
+    buildGameBoard(9, 9);
+    makeDiscoverable();
+}
+
+init();

@@ -17,8 +17,10 @@ Sorted by relevance within category
 ### Snake
 - done
 
-### Minesweeper (new)
-- classic minesweeper
+### Minesweeper 
+- less / no bombs in the starting area
+- clear 0s next to main tile recursively
+- middle click help
 
 ## additional feedback
 - We need audio-feedback (like clicking noise for buttons)
