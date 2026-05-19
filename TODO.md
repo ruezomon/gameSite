@@ -15,12 +15,11 @@ Sorted by relevance within category
 - done
 
 ### Snake
-- done
+- toggle gamemodes (phase through wall) -> wall on / off
 
 ### Minesweeper 
-- less / no bombs in the starting area
-- clear 0s next to main tile recursively
+- generate valid start
 - middle click help
 
 ## additional feedback
-- We need audio-feedback (like clicking noise for buttons)
+- audio feedback
