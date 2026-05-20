@@ -295,7 +295,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-    if (event.key === "r") game.reset().bind(game);
+    if (event.key === "r") game.reset(); //.bind(game);
 });
 
 function lose() {
