@@ -266,6 +266,7 @@ document.getElementById("snake-difficulty").addEventListener("click", (event) =>
 
 document.addEventListener("keydown", (event) => {
     game.startGame(event.keyCode);
+    if (event.keyCode <= 40 && event.keyCode >= 37) event.preventDefault();
 
     if (!gameActive) return;
 
