@@ -56,14 +56,14 @@ function buildGameBoard(rows, collumns) {
     }
 }
 
-function placeBombs(startingRow, startingCollumn) {
+function placeBombs() {
     for (let i = 0; i < bombSum; i++) {
         let c = Number();
         let r = Number();
         do {
             c = Math.round(Math.random() * 100) % boardWidth;
             r = Math.round(Math.random() * 100) % boardHeight;
-        } while (gameBoardElement.children[r].children[c].children[0].classList.contains("bomb") || (r === startingRow && c === startingCollumn));
+        } while (gameBoardElement.children[r].children[c].children[0].classList.contains("bomb") || gameBoardElement.children[r].children[c].children[0].classList.contains("protected-for-start"));
 
         gameBoardElement.children[r].children[c].children[0].classList.add("bomb");
         gameBoardElement.children[r].children[c].classList.add("bomb-parent");
@@ -157,7 +157,20 @@ function mark(row, collumn) {
     gameBoardElement.children[row].children[collumn].children[0].classList.toggle("marked-as-bomb");
 }
 
+function protectStart(row, collumn, value) {
+    gameBoardElement.children[row].children[collumn].classList.add("protected-for-start");
+    if (Math.random() > 0.6 * value && row !== 0 && !gameBoardElement.children[row - 1].children[collumn].classList.contains("protected-for-start"))
+        protectStart(row - 1, collumn, value + 0.1);
+    if (Math.random() > 0.6 * value && row !== boardHeight - 1 && !gameBoardElement.children[row + 1].children[collumn].classList.contains("protected-for-start"))
+        protectStart(row + 1, collumn, value + 0.1);
+    if (Math.random() > 0.6 * value && collumn !== 0 && !gameBoardElement.children[row].children[collumn - 1].classList.contains("protected-for-start"))
+        protectStart(row, collumn - 1, value + 0.1);
+    if (Math.random() > 0.6 * value && collumn !== boardWidth - 1 && !gameBoardElement.children[row].children[collumn + 1].classList.contains("protected-for-start"))
+        protectStart(row, collumn + 1, value + 0.1);
+}
+
 function start(row, collumn) {
+    protectStart(row, collumn, 1);
     placeBombs(row, collumn);
     initNumbersForTiles();
     started = true;
@@ -176,6 +189,7 @@ function win() {
 
 function reset() {
     bombsMarkedSum = 0;
+    wrongBombsMarked = 0;
     clearGameBoard();
     buildGameBoard(boardHeight, boardWidth);
     makeDiscoverable();
