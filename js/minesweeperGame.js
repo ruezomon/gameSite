@@ -58,12 +58,12 @@ function buildGameBoard(rows, collumns) {
 
 function placeBombs() {
     for (let i = 0; i < bombSum; i++) {
-        let c = Number();
         let r = Number();
+        let c = Number();
         do {
-            c = Math.round(Math.random() * 100) % boardWidth;
             r = Math.round(Math.random() * 100) % boardHeight;
-        } while (gameBoardElement.children[r].children[c].children[0].classList.contains("bomb") || gameBoardElement.children[r].children[c].children[0].classList.contains("protected-for-start"));
+            c = Math.round(Math.random() * 100) % boardWidth;
+        } while (gameBoardElement.children[r].children[c].children[0].classList.contains("bomb") || protectedNearby(r, c));
 
         gameBoardElement.children[r].children[c].children[0].classList.add("bomb");
         gameBoardElement.children[r].children[c].classList.add("bomb-parent");
@@ -159,14 +159,23 @@ function mark(row, collumn) {
 
 function protectStart(row, collumn, value) {
     gameBoardElement.children[row].children[collumn].classList.add("protected-for-start");
-    if (Math.random() > 0.6 * value && row !== 0 && !gameBoardElement.children[row - 1].children[collumn].classList.contains("protected-for-start"))
-        protectStart(row - 1, collumn, value + 0.1);
-    if (Math.random() > 0.6 * value && row !== boardHeight - 1 && !gameBoardElement.children[row + 1].children[collumn].classList.contains("protected-for-start"))
-        protectStart(row + 1, collumn, value + 0.1);
-    if (Math.random() > 0.6 * value && collumn !== 0 && !gameBoardElement.children[row].children[collumn - 1].classList.contains("protected-for-start"))
-        protectStart(row, collumn - 1, value + 0.1);
-    if (Math.random() > 0.6 * value && collumn !== boardWidth - 1 && !gameBoardElement.children[row].children[collumn + 1].classList.contains("protected-for-start"))
-        protectStart(row, collumn + 1, value + 0.1);
+    if (Math.random() > 0.4 * value && row !== 0 && !gameBoardElement.children[row - 1].children[collumn].classList.contains("protected-for-start"))
+        protectStart(row - 1, collumn, value + 0.2);
+    if (Math.random() > 0.4 * value && row !== boardHeight - 1 && !gameBoardElement.children[row + 1].children[collumn].classList.contains("protected-for-start"))
+        protectStart(row + 1, collumn, value + 0.2);
+    if (Math.random() > 0.4 * value && collumn !== 0 && !gameBoardElement.children[row].children[collumn - 1].classList.contains("protected-for-start"))
+        protectStart(row, collumn - 1, value + 0.2);
+    if (Math.random() > 0.4 * value && collumn !== boardWidth - 1 && !gameBoardElement.children[row].children[collumn + 1].classList.contains("protected-for-start"))
+        protectStart(row, collumn + 1, value + 0.2);
+}
+
+function protectedNearby(originRow, originCollumn) {
+    let protected = false;
+    [[0, 0], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]].forEach(coords => {
+        if (gameBoardElement.children[originRow + coords[0]] !== undefined && gameBoardElement.children[originRow + coords[0]].children[originCollumn + coords[1]] !== undefined)
+            if (gameBoardElement.children[originRow + coords[0]].children[originCollumn + coords[1]].classList.contains("protected-for-start")) protected = true;
+    });
+    return protected;
 }
 
 function start(row, collumn) {
@@ -188,19 +197,29 @@ function win() {
 }
 
 function reset() {
+    started = false;
     bombsMarkedSum = 0;
+    discoveredTiles = 0;
     wrongBombsMarked = 0;
     clearGameBoard();
     buildGameBoard(boardHeight, boardWidth);
     makeDiscoverable();
-    placeBombs();
-    initNumbersForTiles();
     gameActive = true;
 }
 
 function init() {
     buildGameBoard(9, 9);
     makeDiscoverable();
+}
+
+// debug function
+function uncoverAll() {
+    for (let i = 0; i < boardHeight; i++) {
+        for (let j = 0; j < boardWidth; j++) {
+            if (gameBoardElement.children[i].children[j].children[0] === undefined) continue;
+            gameBoardElement.children[i].children[j].children[0].remove();
+        }
+    }
 }
 
 init();
