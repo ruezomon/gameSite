@@ -198,6 +198,7 @@ function win() {
     gameActive = false;
     document.getElementById("comment-minesweeper").innerHTML = "Good game!"
     document.getElementById("meta-message-minesweeper").innerHTML = "Reset to play another round.";
+    uncoverAll();
 }
 
 function reset() {
@@ -226,6 +227,12 @@ function uncoverAll() {
             gameBoardElement.children[i].children[j].children[0].remove();
         }
     }
+}
+
+// debug function
+function showProtected() {
+   for (let i = 0; i < document.getElementsByClassName("protected-for-start").length; i++) 
+    document.getElementsByClassName("protected-for-start")[i].style.backgroundColor = "blue";
 }
 
 init();
