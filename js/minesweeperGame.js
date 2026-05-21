@@ -179,6 +179,8 @@ function protectedNearby(originRow, originCollumn) {
 }
 
 function start(row, collumn) {
+    document.getElementById("comment-minesweeper").innerHTML = "Don't blow yourself up!"
+    document.getElementById("meta-message-minesweeper").innerHTML = "Discover the rest of the bombs";
     protectStart(row, collumn, 1.2);
     placeBombs(row, collumn);
     initNumbersForTiles();
@@ -188,15 +190,19 @@ function start(row, collumn) {
 
 function lose() {
     gameActive = false;
-    alert("you lost");
+    document.getElementById("comment-minesweeper").innerHTML = "Game over!"
+    document.getElementById("meta-message-minesweeper").innerHTML = "Reset to try again.";
 }
 
 function win() {
     gameActive = false;
-    alert("you won");
+    document.getElementById("comment-minesweeper").innerHTML = "Good game!"
+    document.getElementById("meta-message-minesweeper").innerHTML = "Reset to play another round.";
 }
 
 function reset() {
+    document.getElementById("comment-minesweeper").innerHTML = "Let's start!"
+    document.getElementById("meta-message-minesweeper").innerHTML = "Click anywhere to start";
     started = false;
     bombsMarkedSum = 0;
     discoveredTiles = 0;
