@@ -15,6 +15,8 @@ let discoveredTiles = 0;
 let gameActive = true;
 let started = false;
 
+let timerID = Number();
+
 difficultyToggleButton.addEventListener("click", () => {
     if (difficultyToggleButton.innerHTML === "Easy") {
         difficulty = 1;
@@ -35,6 +37,7 @@ difficultyToggleButton.addEventListener("click", () => {
         boardHeight = 9;
         boardWidth = 9;
     }
+    document.getElementById("minesweeper-timer-wrapper").style.width = (boardWidth * 30 + 20) + "px";
     reset();
 });
 
@@ -186,19 +189,25 @@ function start(row, collumn) {
     initNumbersForTiles();
     started = true;
     gameActive = true;
+
+    timerID = setInterval(() => {
+        document.getElementById("minesweeper-timer").innerHTML++;
+    }, 1000);
+
 }
 
 function lose() {
     gameActive = false;
     document.getElementById("comment-minesweeper").innerHTML = "Game over!"
     document.getElementById("meta-message-minesweeper").innerHTML = "Reset to try again.";
+    clearInterval(timerID);
 }
 
 function win() {
     gameActive = false;
     document.getElementById("comment-minesweeper").innerHTML = "Good game!"
     document.getElementById("meta-message-minesweeper").innerHTML = "Reset to play another round.";
-    uncoverAll();
+    clearInterval(timerID);
 }
 
 function reset() {
@@ -212,6 +221,8 @@ function reset() {
     buildGameBoard(boardHeight, boardWidth);
     makeDiscoverable();
     gameActive = true;
+    clearInterval(timerID);
+    document.getElementById("minesweeper-timer").innerHTML = "0";
 }
 
 function init() {
@@ -231,8 +242,8 @@ function uncoverAll() {
 
 // debug function
 function showProtected() {
-   for (let i = 0; i < document.getElementsByClassName("protected-for-start").length; i++) 
-    document.getElementsByClassName("protected-for-start")[i].style.backgroundColor = "blue";
+    for (let i = 0; i < document.getElementsByClassName("protected-for-start").length; i++) 
+        document.getElementsByClassName("protected-for-start")[i].style.backgroundColor = "blue";
 }
 
 init();

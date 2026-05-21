@@ -495,3 +495,13 @@ footer {
 .surrounded-9 {
     background-color: green;
 }
+
+#minesweeper-timer-wrapper {
+    margin:auto;
+    width:290px;
+}
+
+#minesweeper-timer {
+    width:fit-content;
+    margin:0px 0px 0px auto;
+}
