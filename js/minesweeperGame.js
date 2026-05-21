@@ -179,7 +179,7 @@ function protectedNearby(originRow, originCollumn) {
 }
 
 function start(row, collumn) {
-    protectStart(row, collumn, 1);
+    protectStart(row, collumn, 1.2);
     placeBombs(row, collumn);
     initNumbersForTiles();
     started = true;
