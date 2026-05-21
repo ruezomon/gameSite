@@ -18,7 +18,6 @@ Sorted by relevance within category
 - toggle gamemodes (phase through wall) -> wall on / off
 
 ### Minesweeper 
-- generate valid start
 - middle click help
 
 ## additional feedback
