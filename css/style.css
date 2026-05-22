@@ -505,3 +505,52 @@ footer {
     width:fit-content;
     margin:0px 0px 0px auto;
 }
+
+.about-us-title {
+    width:fit-content;
+    margin:20px auto;
+}
+
+.about-us-members {
+    display:flex;
+}
+
+.site-member {
+    width:500px;
+    height: 600px;
+    border:2px solid black;
+    background-color: grey;
+    border-radius: 20px;
+    margin:10px;
+    padding:20px 5px;
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.site-member img {
+    width:100px;
+    max-height: 300px;
+    margin:15px auto;
+    display:block;
+}
+
+.site-member p {
+    color:white;
+    margin:5px;
+    text-align: center;
+}
+
+.about-us-name {
+    font-size: 30px;
+}
+
+.about-us-role {
+    margin:0px;
+}
+
+.about-us-desc {
+    font-size:20px;
+    width:300px;
+}
