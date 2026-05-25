@@ -507,52 +507,89 @@ footer {
 }
 
 .about-us-title {
-    width:fit-content;
-    margin:20px auto;
+    width: fit-content;
+    margin: 40px auto 32px;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #111;
+}
+ 
+.about-us-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto 60px;
+}
+ 
+.site-member {
+    width: 300px;
+    background: #e4e4e7;
+    border-radius: 16px;
+    padding: 32px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+ 
+.site-member:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+    transform: translateY(-3px);
+}
+ 
+.site-member img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    margin: 0 0 20px;
+    border: 3px solid #f0f0f0;
+    display: block;
+}
+ 
+.site-member p {
+    margin: 0;
+    color: #111;
+}
+ 
+.about-us-name {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px !important;
+    color: #111;
+}
+ 
+.about-us-role {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #4f6ef7;
+    background: #eef1fe;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px !important;
+}
+ 
+.about-us-desc {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #555;
+    max-width: 260px;
 }
 
-.about-us-members {
-    display:flex;
+.about-us-encouragement {
     width:fit-content;
     margin:auto;
 }
 
-.site-member {
-    width:360px;
-    height: 500px;
-    border:2px solid black;
-    background-color: grey;
-    border-radius: 20px;
-    margin:10px;
-    padding:20px 5px;
-    align-items: center;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.site-member img {
-    width:150px;
-    max-height: 480px;
-    margin:15px auto;
-    display:block;
-}
-
-.site-member p {
-    color:white;
-    margin:5px;
-    text-align: center;
-}
-
-.about-us-name {
-    font-size: 30px;
-}
-
-.about-us-role {
-    margin:0px;
-}
-
-.about-us-desc {
-    font-size:20px;
-    width:300px;
+.link-to-our-email {
+    text-decoration: none;
+    color: #45965c;
 }
