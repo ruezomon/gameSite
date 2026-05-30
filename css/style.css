@@ -176,11 +176,11 @@ footer {
 }
 
 #game-option-snake div {
-    background-image: url("../images/wordle.png");
+    background-image: url("../images/snake.png");
 }
 
 #game-option-gewinnt div {
-    background-image: url("../images/wordle.png");
+    background-image: url("../images/gewinnt.png");
 }
 
 #game-option-minesweeper div {
@@ -453,47 +453,53 @@ footer {
 /* } */
 
 .bomb-parent {
-    background-color:red;
+    background-image: url("../images/bomb.png");
+    background-size:contain;
 }
 
 .marked-as-bomb {
-    background-color: blue;
+    background-image: url("../images/flag.png");
+    background-size:contain;
 }
 
 .surrounded-1 {
-    background-color: lightskyblue;
+    background-image: url("../images/one.png");
+    background-size:contain;
 }
 
 .surrounded-2 {
-    background-color: green; 
+    background-image: url("../images/two.png");
+    background-size:contain;
 }
 
 .surrounded-3 {
-    background-color: lightcoral;
+    background-image: url("../images/three.png");
+    background-size:contain;
 }
 
 .surrounded-4 {
-    background-color: darkblue;
+    background-image: url("../images/four.png");
+    background-size:contain;
 }
 
 .surrounded-5 {
-    background-color: purple;
+    background-image: url("../images/five.png");
+    background-size:contain;
 }
 
 .surrounded-6 {
-    background-color: peru;
+    background-image: url("../images/six.png");
+    background-size:contain;
 }
 
 .surrounded-7 {
-    background-color: green;
+    background-image: url("../images/seven.png");
+    background-size:contain;
 }
 
 .surrounded-8 {
-    background-color: green;
-}
-
-.surrounded-9 {
-    background-color: green;
+    background-image: url("../images/eight.png");
+    background-size:contain;
 }
 
 #minesweeper-timer-wrapper {
