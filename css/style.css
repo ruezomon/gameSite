@@ -184,7 +184,7 @@ footer {
 }
 
 #game-option-minesweeper div {
-    background-image: url("../images/wordle.png");
+    background-image: url("../images/minesweeper.png");
 }
 
 .game-option-main:hover, .other-options-main:hover {
